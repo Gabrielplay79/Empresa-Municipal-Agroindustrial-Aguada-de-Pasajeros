@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mi Tienda</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Menú lateral -->
+  <nav id="menu">
+    <ul>
+      <li><a href="#alimentos">Alimentos</a></li>
+      <li><a href="#transporte">Transporte</a></li>
+      <li><a href="#carrito">Carrito</a></li>
+    </ul>
+  </nav>
+
+  <!-- Sección Alimentos -->
+  <section id="alimentos" class="seccion">
+    <h2>Alimentos</h2>
+    <!-- Ejemplo de producto (añade más copiando este bloque) -->
+    <div class="producto" data-precio="300">
+      <img src="URL_DE_TU_IMAGEN" alt="Jamón" class="foto">
+      <p>Jamón - 300 CUP <span class="estado">Popular</span></p>
+      <button class="agregar">Agregar</button>
+    </div>
+  </section>
+
+  <!-- Sección Transporte -->
+  <section id="transporte" class="seccion">
+    <h2>Transporte</h2>
+    <div class="producto" data-precio="1000">
+      <img src="URL_DE_TU_IMAGEN" alt="Camión" class="foto">
+      <p>Camión - 1000 CUP/Ton <span class="estado">Agotado</span></p>
+      <button class="agregar" disabled>Agotado</button>
+    </div>
+  </section>
+
+  <!-- Carrito -->
+  <section id="carrito" class="seccion">
+    <h2>Carrito</h2>
+    <ul id="lista-carrito"></ul>
+    <p>Total: <span id="total">0</span> CUP</p>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
