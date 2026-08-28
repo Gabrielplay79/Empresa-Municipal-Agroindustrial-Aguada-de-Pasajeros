@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tierra Adentro — Distribuidora Agroindustrial</title>
+
+<!-- Tipografías: Fraunces (display) + Archivo (texto) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Iconos -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+  /* ============ VARIABLES Y BASE ============ */
+  :root{
+    --papel:#F5EFE2;
+    --papel-alto:#FBF7EC;
+    --tinta:#20281A;
+    --tinta-suave:#565E4B;
+    --acento:#BF4A1E;
+    --oliva:#5C6B3C;
+    --linea:rgba(32,40,26,.18);
+    --sombra:6px 6px 0 var(--tinta);
+    --sombra-sm:4px 4px 0 var(--tinta);
+    --radio:12px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Archivo',sans-serif;
+    background:var(--papel);
+    color:var(--tinta);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--acento);color:var(--papel)}
+  img{display:block;max-width:100%}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+  input{font-family:inherit}
+  .contenedor{width:min(1160px,92%);margin-inline:auto}
+  :focus-visible{outline:2px solid var(--acento);outline-offset:3px}
+
+  /* Textura sutil de papel */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+    background-image:radial-gradient(rgba(32,40,26,.05) 1px, transparent 1px);
+    background-size:22px 22px;
+  }
+  main,header,footer{position:relative;z-index:1}
+
+  /* ============ BARRA SUPERIOR ============ */
+  .barra-top{
+    background:var(--tinta);color:var(--papel);
+    font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;
+  }
+  .barra-top .contenedor{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:.45rem 0;gap:1rem;flex-wrap:wrap;
+  }
+  .barra-top span{display:inline-flex;align-items:center;gap:.4rem}
+  .barra-top i{width:13px;height:13px}
+
+  /* ============ HEADER ============ */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:var(--papel);border-bottom:1.5px solid var(--tinta);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:.9rem 0;gap:1.5rem;
+  }
+  .logo{display:flex;align-items:center;gap:.7rem;text-decoration:none;color:var(--tinta)}
+  .logo-marca{
+    width:42px;height:42px;border:1.5px solid var(--tinta);border-radius:50%;
+    display:grid;place-items:center;background:var(--papel-alto);
+    box-shadow:3px 3px 0 var(--tinta);
+  }
+  .logo-marca i{width:20px;height:20px;color:var(--oliva)}
+  .logo-texto{font-family:'Fraunces',serif;font-weight:700;font-size:1.3rem;line-height:1.05;letter-spacing:-.01em}
+  .logo-texto small{
+    display:block;font-family:'Archivo',sans-serif;font-weight:600;
+    font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--tinta-suave);
+  }
+  .nav-enlaces{display:flex;gap:1.8rem;list-style:none}
+  .nav-enlaces a{
+    text-decoration:none;color:var(--tinta);font-weight:600;font-size:.9rem;
+    position:relative;padding-bottom:2px;
+  }
+  .nav-enlaces a::after{
+    content:"";position:absolute;left:0;bottom:0;width:0;height:2px;
+    background:var(--acento);transition:width .25s ease;
+  }
+  .nav-enlaces a:hover::after{width:100%}
+
+  .btn-carrito{
+    display:flex;align-items:center;gap:.55rem;
+    background:var(--tinta);color:var(--papel);
+    padding:.6rem 1.1rem;border-radius:999px;font-weight:600;font-size:.9rem;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-carrito:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--acento)}
+  .btn-carrito i{width:18px;height:18px}
+  .carrito-conteo{
+    background:var(--acento);color:var(--papel);
+    min-width:22px;height:22px;border-radius:999px;
+    display:grid;place-items:center;font-size:.75rem;font-weight:700;
+  }
+  .carrito-conteo.pop{animation:pop .35s ease}
+  @keyframes pop{50%{transform:scale(1.45)}}
+
+  /* ============ HERO ============ */
+  .hero{padding:4.5rem 0 4rem}
+  .hero-grid{
+    display:grid;grid-template-columns:1.05fr .95fr;
+    gap:3.5rem;align-items:center;
+  }
+  .kicker{
+    display:inline-flex;align-items:center;gap:.5rem;
+    font-size:.75rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--oliva);border:1.5px solid var(--oliva);border-radius:999px;
+    padding:.35rem .9rem;margin-bottom:1.4rem;
+  }
+  .kicker i{width:14px;height:14px}
+  .hero h1{
+    font-family:'Fraunces',serif;font-weight:600;
+    font-size:clamp(2.7rem,5.6vw,4.4rem);line-height:1.02;letter-spacing:-.02em;
+    margin-bottom:1.3rem;
+  }
+  .hero h1 em{font-style:italic;color:var(--acento);font-weight:500}
+  .hero p{color:var(--tinta-suave);font-size:1.05rem;max-width:46ch;margin-bottom:2rem}
+  .hero-acciones{display:flex;gap:1rem;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:.5rem;
+    padding:.85rem 1.6rem;border-radius:999px;
+    font-weight:700;font-size:.95rem;text-decoration:none;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn i{width:17px;height:17px}
+  .btn-primario{background:var(--acento);color:var(--papel);border:1.5px solid var(--tinta);box-shadow:var(--sombra-sm)}
+  .btn-primario:hover{transform:translate(-3px,-3px);box-shadow:var(--sombra)}
+  .btn-fantasma{border:1.5px solid var(--tinta);color:var(--tinta);background:transparent}
+  .btn-fantasma:hover{background:var(--tinta);color:var(--papel)}
+
+  .hero-figura{position:relative}
+  .hero-figura img{
+    width:100%;aspect-ratio:4/3.4;object-fit:cover;
+    border:1.5px solid var(--tinta);border-radius:var(--radio);
+    box-shadow:var(--sombra);
+  }
+  .sello{
+    position:absolute;bottom:-34px;left:-34px;width:128px;height:128px;
+    background:var(--papel);border:1.5px solid var(--tinta);border-radius:50%;
+    display:grid;place-items:center;box-shadow:var(--sombra-sm);
+  }
+  .sello svg{width:100%;height:100%;animation:girar 20s linear infinite}
+  @keyframes girar{to{transform:rotate(360deg)}}
+  .sello text{font-family:'Archivo',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:2.4px;fill:var(--tinta)}
+  .sello .espiga{stroke:var(--acento);stroke-width:2;fill:none;stroke-linecap:round}
+
+  /* ============ CINTA MARQUEE ============ */
+  .cinta{
+    background:var(--tinta);color:var(--papel);overflow:hidden;
+    border-block:1.5px solid var(--tinta);padding:.7rem 0;
+  }
+  .cinta-pista{display:flex;width:max-content;animation:desfile 28s linear infinite}
+  .cinta:hover .cinta-pista{animation-play-state:paused}
+  .cinta-grupo{display:flex;align-items:center;gap:2.2rem;padding-right:2.2rem;white-space:nowrap}
+  .cinta-grupo span{
+    font-size:.82rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  }
+  .cinta-grupo svg{width:15px;height:15px;stroke:var(--acento);flex-shrink:0}
+  @keyframes desfile{to{transform:translateX(-50%)}}
+
+  /* ============ SECCIONES ============ */
+  section{scroll-margin-top:90px}
+  .cabecera-seccion{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;margin-bottom:2.2rem;flex-wrap:wrap}
+  .sub-titulo{
+    font-size:.75rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--acento);display:flex;align-items:center;gap:.6rem;margin-bottom:.7rem;
+  }
+  .sub-titulo::before{content:"";width:26px;height:2px;background:var(--acento)}
+  .titulo-seccion{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(1.9rem,3.4vw,2.7rem);letter-spacing:-.01em;line-height:1.1}
+
+  /* Controles del catálogo */
+  .controles{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;margin-bottom:1.6rem}
+  .filtros{display:flex;gap:.55rem;flex-wrap:wrap}
+  .filtro{
+    border:1.5px solid var(--tinta);border-radius:999px;
+    padding:.5rem 1.1rem;font-weight:600;font-size:.85rem;
+    background:transparent;transition:all .18s ease;
+  }
+  .filtro:hover{background:var(--papel-alto);transform:translateY(-2px)}
+  .filtro.activo{background:var(--tinta);color:var(--papel)}
+  .buscador{position:relative;margin-left:auto}
+  .buscador i{
+    position:absolute;left:.95rem;top:50%;transform:translateY(-50%);
+    width:16px;height:16px;color:var(--tinta-suave);pointer-events:none;
+  }
+  .buscador input{
+    border:1.5px solid var(--tinta);border-radius:999px;
+    background:var(--papel-alto);padding:.6rem 1.1rem .6rem 2.6rem;
+    font-size:.9rem;width:230px;color:var(--tinta);
+    transition:box-shadow .18s ease;
+  }
+  .buscador input:focus{outline:none;box-shadow:3px 3px 0 var(--acento)}
+  .buscador input::placeholder{color:var(--tinta-suave)}
+
+  /* ============ GRID DE PRODUCTOS ============ */
+  .grid-productos{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(252px,1fr));
+    gap:1.5rem;
+  }
+  .card{
+    background:var(--papel-alto);border:1.5px solid var(--tinta);border-radius:var(--radio);
+    overflow:hidden;display:flex;flex-direction:column;
+    transition:transform .2s ease, box-shadow .2s ease;
+    animation:entra .5s ease both;
+  }
+  .card:hover{transform:translate(-4px,-4px);box-shadow:var(--sombra)}
+  @keyframes entra{from{opacity:0;transform:translateY(16px)}}
+  .card.destacada{grid-column:span 2}
+  @media(max-width:640px){.card.destacada{grid-column:span 1}}
+
+  .card-img{position:relative;overflow:hidden;border-bottom:1.5px solid var(--tinta)}
+  .card-img img{width:100%;aspect-ratio:16/10;object-fit:cover;transition:transform .45s ease}
+  .card:hover .card-img img{transform:scale(1.05)}
+  .card.destacada .card-img img{aspect-ratio:16/8.2}
+  .etiqueta{
+    position:absolute;top:.8rem;left:.8rem;
+    background:var(--acento);color:var(--papel);
+    font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    padding:.3rem .7rem;border-radius:999px;border:1.5px solid var(--tinta);
+  }
+  .etiqueta.oliva{background:var(--oliva)}
+
+  .card-cuerpo{padding:1.1rem 1.2rem 1.25rem;display:flex;flex-direction:column;flex:1}
+  .card-categoria{font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--oliva);margin-bottom:.3rem}
+  .card-nombre{font-family:'Fraunces',serif;font-weight:600;font-size:1.25rem;line-height:1.15;margin-bottom:.35rem}
+  .card-desc{font-size:.83rem;color:var(--tinta-suave);margin-bottom:1rem}
+  .card-pie{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:.8rem}
+  .precio{font-family:'Fraunces',serif;font-weight:700;font-size:1.35rem;letter-spacing:-.01em}
+  .precio small{font-family:'Archivo',sans-serif;font-weight:500;font-size:.72rem;color:var(--tinta-suave);display:block;letter-spacing:.02em}
+  .btn-agregar{
+    display:inline-flex;align-items:center;gap:.45rem;
+    background:var(--tinta);color:var(--papel);
+    padding:.55rem 1rem;border-radius:999px;
+    font-weight:700;font-size:.82rem;
+    transition:background .2s ease, transform .15s ease;
+  }
+  .btn-agregar:hover{background:var(--acento);transform:translateY(-2px)}
+  .btn-agregar.ok{background:var(--oliva)}
+  .btn-agregar i{width:15px;height:15px}
+
+  .sin-resultados{
+    grid-column:1/-1;text-align:center;padding:3.5rem 1rem;
+    border:1.5px dashed var(--linea);border-radius:var(--radio);color:var(--tinta-suave);
+  }
+  .sin-resultados i{width:34px;height:34px;margin:0 auto .8rem;display:block;color:var(--oliva)}
+
+  /* ============ NOSOTROS ============ */
+  .nosotros{padding:5rem 0 4.5rem;border-top:1.5px solid var(--tinta);margin-top:5rem}
+  .nosotros-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
+  .nosotros p{color:var(--tinta-suave);margin-bottom:1rem}
+  .cifras{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid var(--tinta);border-radius:var(--radio);overflow:hidden;background:var(--papel-alto)}
+  .cifra{padding:1.6rem 1.5rem;border-right:1.5px solid var(--tinta);border-bottom:1.5px solid var(--tinta)}
+  .cifra:nth-child(2n){border-right:none}
+  .cifra:nth-child(n+3){border-bottom:none}
+  .cifra strong{font-family:'Fraunces',serif;font-size:2.2rem;font-weight:700;display:block;line-height:1;color:var(--acento)}
+  .cifra span{font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--tinta-suave)}
+
+  /* ============ FOOTER ============ */
+  footer{background:var(--tinta);color:var(--papel);padding:3.2rem 0 1.6rem;margin-top:0}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem}
+  footer .logo-texto{color:var(--papel)}
+  footer .logo-marca{background:transparent;border-color:var(--papel);box-shadow:3px 3px 0 var(--acento)}
+  footer p{color:rgba(245,239,226,.65);font-size:.9rem;max-width:34ch}
+  footer h4{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:1rem;color:var(--acento)}
+  footer ul{list-style:none;display:grid;gap:.55rem;font-size:.9rem;color:rgba(245,239,226,.75)}
+  footer li{display:flex;align-items:center;gap:.55rem}
+  footer li i{width:14px;height:14px;flex-shrink:0}
+  .footer-final{
+    border-top:1px solid rgba(245,239,226,.2);padding-top:1.3rem;
+    display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+    font-size:.78rem;color:rgba(245,239,226,.5);
+  }
+
+  /* ============ CARRITO (DRAWER) ============ */
+  .velo{
+    position:fixed;inset:0;background:rgba(32,40,26,.5);
+    opacity:0;pointer-events:none;transition:opacity .3s ease;z-index:90;
+  }
+  .velo.activo{opacity:1;pointer-events:auto}
+  .drawer{
+    position:fixed;top:0;right:0;height:100dvh;width:min(430px,100%);
+    background:var(--papel);border-left:1.5px solid var(--tinta);
+    transform:translateX(105%);transition:transform .35s cubic-bezier(.32,.72,.28,1);
+    z-index:100;display:flex;flex-direction:column;
+  }
+  .drawer.abierto{transform:translateX(0)}
+  .drawer-cabecera{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1.2rem 1.4rem;border-bottom:1.5px solid var(--tinta);
+  }
+  .drawer-cabecera h3{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:600}
+  .btn-cerrar{
+    width:38px;height:38px;border:1.5px solid var(--tinta);border-radius:50%;
+    display:grid;place-items:center;transition:all .15s ease;
+  }
+  .btn-cerrar:hover{background:var(--tinta);color:var(--papel);transform:rotate(90deg)}
+  .btn-cerrar i{width:17px;height:17px}
+  .drawer-cuerpo{flex:1;overflow-y:auto;padding:1.2rem 1.4rem}
+  .drawer-pie{padding:1.2rem 1.4rem;border-top:1.5px solid var(--tinta);background:var(--papel-alto)}
+
+  .item{
+    display:flex;gap:.9rem;padding:.9rem 0;border-bottom:1px dashed var(--linea);
+  }
+  .item img{width:64px;height:64px;object-fit:cover;border:1.5px solid var(--tinta);border-radius:8px}
+  .item-info{flex:1;min-width:0}
+  .item-nombre{font-weight:700;font-size:.92rem;line-height:1.25}
+  .item-precio{font-size:.8rem;color:var(--tinta-suave);margin-bottom:.4rem}
+  .item-controles{display:flex;align-items:center;gap:.7rem}
+  .btn-cant{
+    width:26px;height:26px;border:1.5px solid var(--tinta);border-radius:50%;
+    display:grid;place-items:center;font-weight:700;transition:all .15s ease;
+  }
+  .btn-cant:hover{background:var(--tinta);color:var(--papel)}
+  .btn-cant i{width:13px;height:13px}
+  .item-cant{font-weight:700;font-size:.95rem;min-width:20px;text-align:center}
+  .item-sub{font-family:'Fraunces',serif;font-weight:700;font-size:1rem;white-space:nowrap}
+  .btn-eliminar{
+    align-self:flex-start;color:var(--tinta-suave);transition:color .15s ease;
+    display:grid;place-items:center;padding:2px;
+  }
+  .btn-eliminar:hover{color:var(--acento)}
+  .btn-eliminar i{width:15px;height:15px}
+
+  .carrito-vacio{text-align:center;padding:3.5rem 1rem;color:var(--tinta-suave)}
+  .carrito-vacio i{width:44px;height:44px;margin:0 auto 1rem;display:block;color:var(--oliva)}
+  .carrito-vacio p{margin-bottom:1.4rem}
+
+  .total-linea{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1rem}
+  .total-linea span{font-weight:600;font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;color:var(--tinta-suave)}
+  .total-linea strong{font-family:'Fraunces',serif;font-size:1.7rem;font-weight:700}
+  .btn-bloque{width:100%;justify-content:center}
+
+  /* Formulario de pedido */
+  .campo{margin-bottom:1rem}
+  .campo label{display:block;font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.35rem}
+  .campo input,.campo textarea{
+    width:100%;border:1.5px solid var(--tinta);border-radius:10px;
+    background:var(--papel-alto);padding:.7rem .9rem;font-size:.95rem;color:var(--tinta);
+    transition:box-shadow .15s ease;resize:vertical;
+  }
+  .campo input:focus,.campo textarea:focus{outline:none;box-shadow:3px 3px 0 var(--acento)}
+  .campo.error input{border-color:var(--acento)}
+  .campo .msg-error{display:none;font-size:.76rem;color:var(--acento);font-weight:600;margin-top:.3rem}
+  .campo.error .msg-error{display:block}
+
+  /* Confirmación */
+  .confirmacion{text-align:center;padding:2.5rem 1rem}
+  .confirmacion .check-circulo{
+    width:74px;height:74px;border:2px solid var(--oliva);border-radius:50%;
+    display:grid;place-items:center;margin:0 auto 1.4rem;background:var(--papel-alto);
+    animation:pop .5s ease;
+  }
+  .confirmacion .check-circulo i{width:34px;height:34px;color:var(--oliva)}
+  .confirmacion h4{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:600;margin-bottom:.5rem}
+  .confirmacion p{color:var(--tinta-suave);font-size:.92rem;margin-bottom:.4rem}
+  .orden-codigo{
+    display:inline-block;font-family:'Fraunces',serif;font-weight:700;font-size:1.15rem;
+    border:1.5px dashed var(--tinta);border-radius:10px;padding:.5rem 1.2rem;margin:1rem 0 1.5rem;
+    background:var(--papel-alto);
+  }
+
+  /* ============ TOASTS ============ */
+  #toasts{position:fixed;bottom:1.4rem;left:50%;transform:translateX(-50%);z-index:200;display:grid;gap:.6rem;width:max-content;max-width:92%}
+  .toast{
+    display:flex;align-items:center;gap:.6rem;
+    background:var(--tinta);color:var(--papel);
+    padding:.75rem 1.3rem;border-radius:999px;font-weight:600;font-size:.88rem;
+    box-shadow:var(--sombra-sm);border:1.5px solid var(--tinta);
+    animation:toastEn .3s ease, toastFuera .3s ease 2.4s both;
+  }
+  .toast i{width:16px;height:16px;color:#8DB255}
+  @keyframes toastEn{from{opacity:0;transform:translateY(14px)}}
+  @keyframes toastFuera{to{opacity:0;transform:translateY(10px)}}
+
+  /* ============ REVEAL ON SCROLL ============ */
+  [data-reveal]{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+  [data-reveal].visible{opacity:1;transform:none}
+
+  /* ============ RESPONSIVE ============ */
+  @media(max-width:900px){
+    .hero-grid,.nosotros-grid{grid-template-columns:1fr;gap:2.5rem}
+    .hero{padding:3rem 0 3.5rem}
+    .sello{width:104px;height:104px;bottom:-26px;left:-14px}
+    .footer-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:680px){
+    .nav-enlaces{display:none}
+    .buscador{margin-left:0;width:100%}
+    .buscador input{width:100%}
+    .footer-grid{grid-template-columns:1fr}
+    .barra-top .contenedor{justify-content:center}
+  }
+</style>
+</head>
+<body>
+
+<!-- Barra superior -->
+<div class="barra-top">
+  <div class="contenedor">
+    <span><i data-lucide="map-pin"></i> Valle del Molino, Km 42 — Ruta Panamericana</span>
+    <span><i data-lucide="phone"></i> (+51) 987 654 321</span>
+    <span><i data-lucide="clock"></i> Lun–Sáb · 7:00 a 18:00</span>
+  </div>
+</div>
+
+<!-- Header -->
+<header>
+  <div class="contenedor nav">
+    <a href="#" class="logo">
+      <span class="logo-marca"><i data-lucide="sprout"></i></span>
+      <span class="logo-texto">Tierra Adentro<small>Distribuidora agroindustrial</small></span>
+    </a>
+    <nav>
+      <ul class="nav-enlaces">
+        <li><a href="#productos">Catálogo</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+    <button class="btn-carrito" id="abrirCarrito" aria-label="Abrir pedido">
+      <i data-lucide="shopping-basket"></i>
+      Mi pedido
+      <span class="carrito-conteo" id="conteoCarrito">0</span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="contenedor hero-grid">
+      <div>
+        <span class="kicker"><i data-lucide="wheat"></i> Campaña 2025 en curso</span>
+        <h1>De la <em>cosecha</em> a tu negocio, sin intermediarios.</h1>
+        <p>Compramos directo a más de 240 productores de la región y distribuimos granos,
+           hortalizas, frutas e insumos con trazabilidad completa y precios de origen.</p>
+        <div class="hero-acciones">
+          <a href="#productos" class="btn btn-primario">Ver catálogo <i data-lucide="arrow-down"></i></a>
+          <a href="#nosotros" class="btn btn-fantasma">Conocer la empresa</a>
+        </div>
+      </div>
+      <div class="hero-figura">
+        <img src="https://picsum.photos/seed/campo-cosecha-88/980/840.jpg" alt="Campos de cultivo al amanecer">
+        <!-- Sello giratorio: detalle firma -->
+        <div class="sello" aria-hidden="true">
+          <svg viewBox="0 0 128 128">
+            <defs>
+              <path id="circ" d="M64,64 m-47,0 a47,47 0 1,1 94,0 a47,47 0 1,1 -94,0"/>
+            </defs>
+            <text><textPath href="#circ">COSECHA 2025 · CALIDAD DE ORIGEN ·</textPath></text>
+            <g class="espiga">
+              <path d="M64 44 v40"/>
+              <path d="M64 52 l-9 -6 M64 52 l9 -6"/>
+              <path d="M64 62 l-9 -6 M64 62 l9 -6"/>
+              <path d="M64 72 l-9 -6 M64 72 l9 -6"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cinta marquee -->
+  <div class="cinta" aria-hidden="true">
+    <div class="cinta-pista" id="cintaPista"></div>
+  </div>
+
+  <!-- Catálogo -->
+  <section id="productos" style="padding:4.5rem 0 0">
+    <div class="contenedor">
+      <div class="cabecera-seccion" data-reveal>
+        <div>
+          <p class="sub-titulo">Catálogo de temporada</p>
+          <h2 class="titulo-seccion">Lo que la tierra dio esta campaña</h2>
+        </div>
+        <p style="color:var(--tinta-suave);font-size:.95rem" id="contadorResultados"></p>
+      </div>
+
+      <div class="controles" data-reveal>
+        <div class="filtros" id="filtros">
+          <button class="filtro activo" data-cat="todos">Todos</button>
+          <button class="filtro" data-cat="granos">Granos y semillas</button>
+          <button class="filtro" data-cat="hortalizas">Hortalizas</button>
+          <button class="filtro" data-cat="frutas">Frutas</button>
+          <button class="filtro" data-cat="insumos">Insumos</button>
+        </div>
+        <div class="buscador">
+          <i data-lucide="search"></i>
+          <input type="text" id="buscador" placeholder="Buscar producto…" aria-label="Buscar producto">
+        </div>
+      </div>
+
+      <div class="grid-productos" id="gridProductos"></div>
+    </div>
+  </section>
+
+  <!-- Nosotros -->
+  <section id="nosotros" class="nosotros">
+    <div class="contenedor">
+      <div class="nosotros-grid">
+        <div data-reveal>
+          <p class="sub-titulo">Nuestra historia</p>
+          <h2 class="titulo-seccion" style="margin-bottom:1.3rem">Tres generaciones trabajando el mismo valle</h2>
+          <p>Nacimos en 1987 como un pequeño acopio familiar. Hoy operamos dos centros de
+             acopio y una flota propia que conecta la producción local con mercados,
+             restaurantes y agroindustrias de todo el país.</p>
+          <p>Trabajamos con contratos justos, pagamos al contado al productor y garantizamos
+             que cada lote que sale de nuestros almacenes tenga origen, peso y humedad verificados.</p>
+        </div>
+        <div class="cifras" data-reveal>
+          <div class="cifra"><strong>38</strong><span>años en el campo</span></div>
+          <div class="cifra"><strong>+240</strong><span>productores aliados</span></div>
+          <div class="cifra"><strong>12 mil</strong><span>toneladas al año</span></div>
+          <div class="cifra"><strong>24 h</strong><span>entrega en el valle</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer id="contacto">
+  <div class="contenedor">
+    <div class="footer-grid">
+      <div>
+        <a href="#" class="logo" style="margin-bottom:1rem">
+          <span class="logo-marca"><i data-lucide="sprout"></i></span>
+          <span class="logo-texto">Tierra Adentro<small>Distribuidora agroindustrial</small></span>
+        </a>
+        <p>Granos, hortalizas, frutas e insumos con calidad de origen. Pedidos mayores y cotizaciones por volumen.</p>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          <li><i data-lucide="map-pin"></i> Km 42, Ruta Panamericana</li>
+          <li><i data-lucide="phone"></i> (+51) 987 654 321</li>
+          <li><i data-lucide="mail"></i> ventas@tierraadentro.pe</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Horario de acopio</h4>
+        <ul>
+          <li><i data-lucide="calendar"></i> Lunes a sábado</li>
+          <li><i data-lucide="clock"></i> 7:00 — 18:00 h</li>
+          <li><i data-lucide="truck"></i> Despachos desde las 6:00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-final">
+      <span>© 2025 Tierra Adentro S.A.C. — Todos los derechos reservados.</span>
+      <span>Hecho con orgullo de campo.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Carrito lateral -->
+<div class="velo" id="velo"></div>
+<aside class="drawer" id="drawer" aria-label="Pedido">
+  <div class="drawer-cabecera">
+    <h3 id="drawerTitulo">Mi pedido</h3>
+    <button class="btn-cerrar" id="cerrarCarrito" aria-label="Cerrar pedido"><i data-lucide="x"></i></button>
+  </div>
+  <div class="drawer-cuerpo" id="drawerCuerpo"></div>
+  <div class="drawer-pie" id="drawerPie"></div>
+</aside>
+
+<!-- Toasts -->
+<div id="toasts"></div>
+
+<script>
+/* =========================================================
+   DATOS DEL CATÁLOGO
+========================================================= */
+const PRODUCTOS = [
+  {id:1, nombre:"Maíz Amarillo", cat:"granos", unidad:"saco 50 kg", precio:82.50, etiqueta:"Temporada", tipo:"acento", desc:"Grano seco seleccionado, humedad ≤ 13%. Ideal para alimento balanceado y molienda.", destacada:true,  seed:"maiz-dorado-01"},
+  {id:2, nombre:"Soya", cat:"granos", unidad:"saco 50 kg", precio:96.00, desc:"Grano de alto contenido proteico para industria alimentaria.", seed:"soya-grano-02"},
+  {id:3, nombre:"Arroz Grano Largo", cat:"granos", unidad:"saco 25 kg", precio:48.00, desc:"Pilado de primera, rendimiento 62%.", seed:"arroz-campo-03"},
+  {id:4, nombre:"Trigo Panadero", cat:"granos", unidad:"saco 50 kg", precio:91.00, desc:"Proteína 12.5%, apto para harinaspanificables.", seed:"trigo-espiga-04"},
+  {id:5, nombre:"Papa Amarilla", cat:"hortalizas", unidad:"malla 25 kg", precio:38.00, desc:"Calibre uniforme, seleccionada a mano.", seed:"papa-cosecha-05"},
+  {id:6, nombre:"Cebolla Roja", cat:"hortalizas", unidad:"malla 20 kg", precio:29.50, desc:"Firme, de bulbo compacto y color intenso.", seed:"cebolla-roja-06"},
+  {id:7, nombre:"Zanahoria Fresca", cat:"hortalizas", unidad:"caja 18 kg", precio:24.00, desc:"Recién cosechada, lavada y clasificada.", seed:"zanahoria-07"},
+  {id:8, nombre:"Aguacate Hass", cat:"frutas", unidad:"caja 22 kg", precio:67.00, etiqueta:"Orgánico", tipo:"oliva", desc:"Materia seca certificada, lista para exportación.", seed:"aguacate-08"},
+  {id:9, nombre:"Plátano de Seda", cat:"frutas", unidad:"caja 19 kg", precio:26.50, desc:"Dulce, pulpa firme, maduración controlada.", seed:"platano-09"},
+  {id:10, nombre:"Mango Kent", cat:"frutas", unidad:"caja 20 kg", precio:31.00, etiqueta:"Temporada", tipo:"acento", desc:"Brix ≥ 14°, sin fibra, calibre 10–12.", seed:"mango-kent-10"},
+  {id:11, nombre:"Fertilizante NPK 17-17-17", cat:"insumos", unidad:"bulto 50 kg", precio:54.00, desc:"Formulación equilibrada para todo tipo de cultivo.", seed:"fertilizante-11"},
+  {id:12, nombre:"Semilla Certificada de Maíz", cat:"insumos", unidad:"sobre 20 kg", precio:118.00, desc:"Híbrido de alto rendimiento, tratada.", seed:"semilla-12"},
+];
+
+const CATEGORIAS = {granos:"Granos y semillas", hortalizas:"Hortalizas", frutas:"Frutas", insumos:"Insumos agropecuarios"};
+const fmt = n => "$" + n.toLocaleString("es", {minimumFractionDigits:2, maximumFractionDigits:2});
+
+/* =========================================================
+   ESTADO
+========================================================= */
+const estado = { cat:"todos", q:"", carrito:new Map() }; // carrito: id -> cantidad
+const $ = s => document.querySelector(s);
+
+/* =========================================================
+   CINTA MARQUEE (contenido duplicado para loop infinito)
+========================================================= */
+const frasesCinta = ["Entrega en 24 h","Precios de productor","Calidad verificada","Compra directa del campo","Trazabilidad por lote","Facturación al contado"];
+const espigaSVG = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 3v18M12 8l-5-3.5M12 8l5-3.5M12 14l-5-3.5M12 14l5-3.5"/></svg>';
+const grupoHTML = `<div class="cinta-grupo">${frasesCinta.map(f=>`<span>${f}</span>${espigaSVG}`).join("")}</div>`;
+ $("#cintaPista").innerHTML = grupoHTML + grupoHTML;
+
+/* =========================================================
+   RENDER DE PRODUCTOS
+========================================================= */
+function productosFiltrados(){
+  const q = estado.q.trim().toLowerCase();
+  return PRODUCTOS.filter(p =>
+    (estado.cat==="todos" || p.cat===estado.cat) &&
+    (q==="" || p.nombre.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q))
+  );
+}
+
+function renderProductos(){
+  const lista = productosFiltrados();
+  const grid = $("#gridProductos");
+
+  $("#contadorResultados").textContent =
+    lista.length === 1 ? "1 producto disponible" : `${lista.length} productos disponibles`;
+
+  if(lista.length===0){
+    grid.innerHTML = `
+      <div class="sin-resultados">
+        <i data-lucide="sprout"></i>
+        No encontramos ese producto en esta campaña.<br>Prueba con otro término o categoría.
+      </div>`;
+    lucide.createIcons();
+    return;
+  }
+
+  grid.innerHTML = lista.map((p,i)=>`
+    <article class="card ${p.destacada?"destacada":""}" style="animation-delay:${i*55}ms">
+      <div class="card-img">
+        <img src="https://picsum.photos/seed/${p.seed}/720/460.jpg" alt="${p.nombre}" loading="lazy">
+        ${p.etiqueta?`<span class="etiqueta ${p.tipo==="oliva"?"oliva":""}">${p.etiqueta}</span>`:""}
+      </div>
+      <div class="card-cuerpo">
+        <p class="card-categoria">${CATEGORIAS[p.cat]}</p>
+        <h3 class="card-nombre">${p.nombre}</h3>
+        <p class="card-desc">${p.desc}</p>
+        <div class="card-pie">
+          <p class="precio">${fmt(p.precio)}<small>por ${p.unidad}</small></p>
+          <button class="btn-agregar" data-id="${p.id}" aria-label="Agregar ${p.nombre} al pedido">
+            <i data-lucide="plus"></i> Agregar
+          </button>
+        </div>
+      </div>
+    </article>`).join("");
+  lucide.createIcons();
+}
+
+/* Filtros y búsqueda */
+ $("#filtros").addEventListener("click", e=>{
+  const btn = e.target.closest(".filtro");
+  if(!btn) return;
+  document.querySelectorAll(".filtro").forEach(b=>b.classList.remove("activo"));
+  btn.classList.add("activo");
+  estado.cat = btn.dataset.cat;
+  renderProductos();
+});
+ $("#buscador").addEventListener("input", e=>{
+  estado.q = e.target.value;
+  renderProductos();
+});
+
+/* Agregar al carrito (delegación) + microinteracción del botón */
+ $("#gridProductos").addEventListener("click", e=>{
+  const btn = e.target.closest(".btn-agregar");
+  if(!btn) return;
+  const id = Number(btn.dataset.id);
+  estado.carrito.set(id, (estado.carrito.get(id)||0)+1);
+  actualizarConteo(true);
+
+  // Feedback visual en el botón
+  btn.classList.add("ok");
+  btn.innerHTML = '<i data-lucide="check"></i> Agregado';
+  lucide.createIcons();
+  setTimeout(()=>{
+    btn.classList.remove("ok");
+    btn.innerHTML = '<i data-lucide="plus"></i> Agregar';
+    lucide.createIcons();
+  }, 1200);
+
+  toast(`${nombreProducto(id)} agregado al pedido`);
+});
+
+const nombreProducto = id => PRODUCTOS.find(p=>p.id===id).nombre;
+
+/* =========================================================
+   CARRITO
+========================================================= */
+let vistaDrawer = "carrito"; // carrito | formulario | confirmacion
+
+function abrirDrawer(){ $("#drawer").classList.add("abierto"); $("#velo").classList.add("activo"); document.body.style.overflow="hidden"; renderDrawer(); }
+function cerrarDrawer(){ $("#drawer").classList.remove("abierto"); $("#velo").classList.remove("activo"); document.body.style.overflow=""; }
+ $("#abrirCarrito").addEventListener("click", abrirDrawer);
+ $("#cerrarCarrito").addEventListener("click", cerrarDrawer);
+ $("#velo").addEventListener("click", cerrarDrawer);
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") cerrarDrawer(); });
+
+function actualizarConteo(pop){
+  const total = [...estado.carrito.values()].reduce((a,b)=>a+b,0);
+  const el = $("#conteoCarrito");
+  el.textContent = total;
+  if(pop){ el.classList.remove("pop"); void el.offsetWidth; el.classList.add("pop"); }
+}
+
+function totalPedido(){
+  return [...estado.carrito.entries()].reduce((sum,[id,cant])=>{
+    const p = PRODUCTOS.find(x=>x.id===id);
+    return sum + p.precio*cant;
+  },0);
+}
+
+function renderDrawer(){
+  const cuerpo = $("#drawerCuerpo"), pie = $("#drawerPie"), titulo = $("#drawerTitulo");
+
+  /* --- Vista: confirmación de pedido --- */
+  if(vistaDrawer==="confirmacion"){
+    titulo.textContent = "Pedido registrado";
+    const codigo = "TA-" + Math.random().toString(36).slice(2,7).toUpperCase();
+    const total = totalPedido(), items = [...estado.carrito.values()].reduce((a,b)=>a+b,0);
+    cuerpo.innerHTML = `
+      <div class="confirmacion">
+        <div class="check-circulo"><i data-lucide="check"></i></div>
+        <h4>¡Gracias por su compra!</h4>
+        <p>Un asesor le contactará en las próximas horas para coordinar la entrega.</p>
+        <span class="orden-codigo">${codigo}</span>
+        <p><strong>${items} ${items===1?"unidad":"unidades"}</strong> · Total ${fmt(total)}</p>
+      </div>`;
+    pie.innerHTML = `<button class="btn btn-primario btn-bloque" id="volverTienda">Seguir comprando</button>`;
+    lucide.createIcons();
+    $("#volverTienda").addEventListener("click", ()=>{
+      estado.carrito.clear(); actualizarConteo(false);
+      vistaDrawer = "carrito"; cerrarDrawer();
+      toast("Pedido registrado con éxito");
+    });
+    return;
+  }
+
+  /* --- Vista: formulario de datos --- */
+  if(vistaDrawer==="formulario"){
+    titulo.textContent = "Datos de entrega";
+    cuerpo.innerHTML = `
+      <form id="formPedido" novalidate>
+        <div class="campo" data-campo="nombre">
+          <label for="fNombre">Nombre o razón social *</label>
+          <input id="fNombre" type="text" placeholder="Ej. Agropecuaria El Roble">
+          <span class="msg-error">Ingrese su nombre o razón social.</span>
+        </div>
+        <div class="campo" data-campo="telefono">
+          <label for="fTelefono">Teléfono de contacto *</label>
+          <input id="fTelefono" type="tel" placeholder="Ej. 987 654 321">
+          <span class="msg-error">Ingrese un teléfono válido (mín. 6 dígitos).</span>
+        </div>
+        <div class="campo">
+          <label for="fDireccion">Dirección de entrega</label>
+          <input id="fDireccion" type="text" placeholder="Calle, número, distrito">
+        </div>
+        <div class="campo">
+          <label for="fNota">Nota para el pedido</label>
+          <textarea id="fNota" rows="3" placeholder="Indicaciones especiales, horario preferido…"></textarea>
+        </div>
+      </form>`;
+    pie.innerHTML = `
+      <div class="total-linea"><span>Total</span><strong>${fmt(totalPedido())}</strong></div>
+      <button class="btn btn-primario btn-bloque" id="confirmarPedido">
+        Confirmar pedido <i data-lucide="arrow-right"></i>
+      </button>
+      <button class="btn btn-fantasma btn-bloque" id="volverCarrito" style="margin-top:.6rem">Volver al pedido</button>`;
+    lucide.createIcons();
+
+    $("#volverCarrito").addEventListener("click", ()=>{ vistaDrawer="carrito"; renderDrawer(); });
+    $("#confirmarPedido").addEventListener("click", ()=>{
+      let valido = true;
+      const nombre = $("#fNombre").value.trim();
+      const tel = $("#fTelefono").value.trim();
+      const campoNombre = document.querySelector('[data-campo="nombre"]');
+      const campoTel = document.querySelector('[data-campo="telefono"]');
+      campoNombre.classList.toggle("error", !nombre); if(!nombre) valido=false;
+      const telOk = tel.replace(/\D/g,"").length >= 6;
+      campoTel.classList.toggle("error", !telOk); if(!telOk) valido=false;
+      if(!valido) return;
+      vistaDrawer = "confirmacion"; renderDrawer();
+    });
+    return;
+  }
+
+  /* --- Vista: carrito normal --- */
+  titulo.textContent = "Mi pedido";
+  if(estado.carrito.size===0){
+    cuerpo.innerHTML = `
+      <div class="carrito-vacio">
+        <i data-lucide="shopping-basket"></i>
+        <p>Tu pedido está vacío.<br>Explora el catálogo y agrega lo que necesites.</p>
+        <button class="btn btn-fantasma" id="irCatalogo">Explorar catálogo</button>
+      </div>`;
+    pie.innerHTML = "";
+    lucide.createIcons();
+    $("#irCatalogo").addEventListener("click", ()=>{
+      cerrarDrawer();
+      document.getElementById("productos").scrollIntoView({behavior:"smooth"});
+    });
+    return;
+  }
+
+  cuerpo.innerHTML = [...estado.carrito.entries()].map(([id,cant])=>{
+    const p = PRODUCTOS.find(x=>x.id===id);
+    return `
+    <div class="item">
+      <img src="https://picsum.photos/seed/${p.seed}/160/160.jpg" alt="${p.nombre}">
+      <div class="item-info">
+        <p class="item-nombre">${p.nombre}</p>
+        <p class="item-precio">${fmt(p.precio)} / ${p.unidad}</p>
+        <div class="item-controles">
+          <button class="btn-cant" data-accion="menos" data-id="${id}" aria-label="Quitar uno"><i data-lucide="minus"></i></button>
+          <span class="item-cant">${cant}</span>
+          <button class="btn-cant" data-accion="mas" data-id="${id}" aria-label="Agregar uno"><i data-lucide="plus"></i></button>
+        </div>
+      </div>
+      <div style="display:grid;gap:.3rem;justify-items:end">
+        <button class="btn-eliminar" data-accion="eliminar" data-id="${id}" aria-label="Eliminar ${p.nombre}"><i data-lucide="trash-2"></i></button>
+        <span class="item-sub">${fmt(p.precio*cant)}</span>
+      </div>
+    </div>`;
+  }).join("");
+
+  pie.innerHTML = `
+    <div class="total-linea"><span>Total estimado</span><strong>${fmt(totalPedido())}</strong></div>
+    <button class="btn btn-primario btn-bloque" id="realizarPedido">
+      Realizar pedido <i data-lucide="arrow-right"></i>
+    </button>`;
+  lucide.createIcons();
+
+  $("#realizarPedido").addEventListener("click", ()=>{ vistaDrawer="formulario"; renderDrawer(); });
+}
+
+/* Controles de cantidad (delegación dentro del drawer) */
+ $("#drawerCuerpo").addEventListener("click", e=>{
+  const btn = e.target.closest("[data-accion]");
+  if(!btn) return;
+  const id = Number(btn.dataset.id);
+  const accion = btn.dataset.accion;
+  const actual = estado.carrito.get(id)||0;
+
+  if(accion==="mas") estado.carrito.set(id, actual+1);
+  if(accion==="menos"){
+    if(actual<=1) estado.carrito.delete(id);
+    else estado.carrito.set(id, actual-1);
+  }
+  if(accion==="eliminar"){ estado.carrito.delete(id); toast(`${nombreProducto(id)} eliminado del pedido`); }
+
+  actualizarConteo(false);
+  renderDrawer();
+});
+
+/* =========================================================
+   TOASTS
+========================================================= */
+function toast(mensaje){
+  const el = document.createElement("div");
+  el.className = "toast";
+  el.innerHTML = `<i data-lucide="check-circle-2"></i> ${mensaje}`;
+  $("#toasts").appendChild(el);
+  lucide.createIcons();
+  setTimeout(()=>el.remove(), 2800);
+}
+
+/* =========================================================
+   REVEAL ON SCROLL
+========================================================= */
+const observador = new IntersectionObserver(entradas=>{
+  entradas.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("visible"); observador.unobserve(e.target); }});
+},{threshold:.12});
+document.querySelectorAll("[data-reveal]").forEach(el=>observador.observe(el));
+
+/* =========================================================
+   INICIO
+========================================================= */
+renderProductos();
+lucide.createIcons();
+</script>
+</body>
+</html>
