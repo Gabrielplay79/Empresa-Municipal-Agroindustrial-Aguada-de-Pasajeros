@@ -904,3 +904,100 @@ main,header,footer{position:relative;z-index:1}
   background: var(--color-primary, #8b4513);
   color: #fff;
 }
+
+/* ==========================================================================
+   CONFIANZA — franja informativa y sección Quiénes somos
+   ========================================================================== */
+.trust-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1.5rem 0 2.5rem;
+  border: 1.5px solid var(--tinta);
+  border-radius: var(--radio);
+  background: var(--papel-alto);
+  box-shadow: var(--sombra-sm);
+  overflow: hidden;
+}
+.trust-item {
+  padding: 1rem 1.2rem;
+  text-align: center;
+  border-right: 1.5px solid var(--linea);
+}
+.trust-item:last-child {
+  border-right: none;
+}
+.trust-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+  margin-bottom: 0.25rem;
+}
+.trust-value {
+  display: block;
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--tinta);
+  line-height: 1.3;
+}
+
+.about-section {
+  margin-bottom: 3rem;
+  padding: 1.8rem 1.6rem;
+  background: var(--papel-alto);
+  border: 1.5px solid var(--tinta);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra-sm);
+}
+.about-section .cabecera-seccion {
+  margin-bottom: 1.1rem;
+}
+.about-content {
+  max-width: 68ch;
+}
+.about-content p {
+  margin-bottom: 0.9rem;
+  color: var(--tinta);
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+.about-content p:last-child {
+  margin-bottom: 0;
+}
+.about-note {
+  padding: 0.85rem 1rem;
+  background: rgba(92, 107, 60, 0.1);
+  border-left: 3px solid var(--oliva);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95rem !important;
+  color: var(--tinta-suave) !important;
+}
+
+@media (max-width: 720px) {
+  .trust-strip {
+    grid-template-columns: 1fr;
+  }
+  .trust-item {
+    border-right: none;
+    border-bottom: 1.5px solid var(--linea);
+    text-align: left;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.85rem 1.1rem;
+  }
+  .trust-item:last-child {
+    border-bottom: none;
+  }
+  .trust-label {
+    min-width: 5.5rem;
+    margin-bottom: 0;
+  }
+  .about-section {
+    padding: 1.4rem 1.15rem;
+  }
+}

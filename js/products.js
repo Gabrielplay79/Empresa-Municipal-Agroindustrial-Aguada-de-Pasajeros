@@ -1,5 +1,37 @@
-/* Fallback catalog data for file:// and offline — synced from products.json */
-window.PRODUCTS_DATA = {
+/* ==========================================================================
+   products.js — Carga y render del catálogo
+   --------------------------------------------------------------------------
+   ESTRATEGIA DE CARGA (3 capas, fail-safe):
+     1) Si existe window.PRODUCTS_DATA (cargada por data/products.js como
+        <script> en el HTML), la usa directamente. Es el camino mas rapido
+        y funciona en file://, http:// y https://.
+     2) Si no, intenta descargar data/products.json con fetch().
+        Funciona en GitHub Pages y en cualquier servidor HTTP.
+     3) Si fetch() tambien falla, usa el catalogo EMBEBIDO en este archivo
+        (CATALOG_EMBED, mas abajo). Garantia absoluta de que la tienda
+        siempre muestre productos aunque el navegador bloquee fetch() Y
+        data/products.js no se haya cargado.
+     4) Solo si todo lo anterior falla, muestra el mensaje de error (#errorBox).
+
+   MANTENIMIENTO: edita data/products.json y vuelve a ejecutar
+   python scripts/sync_products_js.py (o pega el JSON nuevo en CATALOG_EMBED).
+   ========================================================================== */
+
+(function (global) {
+  "use strict";
+
+  var DATA_URL = "data/products.json";
+
+  var categories = [];
+  var products = [];
+
+  /* ======================================================================
+     CATALOGO EMBEDIDO — copia literal de data/products.json
+     ======================================================================
+     Ultima linea de defensa: si ni fetch() ni window.PRODUCTS_DATA estan
+     disponibles, este literal garantiza que los productos se muestren.
+     ====================================================================== */
+  var CATALOG_EMBED = {
   "categories": [
     {
       "id": "carnicos",
@@ -668,3 +700,303 @@ window.PRODUCTS_DATA = {
     "note": "Importante: para más información de los servicios llame o escriba a los números de contacto. El horario de cada servicio se coordina de antemano."
   }
 };
+
+  /* ======================================================================
+     CARGA DE DATOS
+     ====================================================================== */
+  function load() {
+    // Capa 1: respaldo embebido en data/products.js (cargado como <script>)
+    if (global.PRODUCTS_DATA) {
+      try {
+        initData(global.PRODUCTS_DATA);
+        console.info("products.js: catalogo cargado desde window.PRODUCTS_DATA");
+        return Promise.resolve();
+      } catch (e) {
+        console.warn("products.js: window.PRODUCTS_DATA invalido:", e);
+      }
+    }
+
+    // Capa 2: fetch del JSON
+    return fetch(DATA_URL)
+      .then(function (res) {
+        if (!res.ok) {
+          throw new Error("HTTP " + res.status + " al cargar products.json");
+        }
+        return res.json();
+      })
+      .then(function (data) {
+        console.info("products.js: catalogo cargado desde " + DATA_URL);
+        initData(data);
+      })
+      .catch(function (err) {
+        console.warn(
+          "products.js: no se pudo leer " + DATA_URL + " (" + (err && err.message ? err.message : err) + "). " +
+          "Usando catalogo embebido en este archivo..."
+        );
+        // Capa 3: catalogo embebido en este propio js/products.js
+        try {
+          initData(CATALOG_EMBED);
+          console.info("products.js: catalogo cargado desde CATALOG_EMBED");
+        } catch (e2) {
+          console.error("products.js: catalogo embebido invalido:", e2);
+          showError();
+        }
+      });
+  }
+
+  /** Valida, ordena y renderiza los datos del catalogo. */
+  function initData(data) {
+    if (!data || !Array.isArray(data.categories) || !Array.isArray(data.products)) {
+      throw new Error("Estructura de datos invalida");
+    }
+    categories = data.categories.slice().sort(function (a, b) {
+      return (a.order || 0) - (b.order || 0);
+    });
+    products = data.products.slice();
+    renderNav();
+    renderCatalog();
+  }
+
+  /* ======================================================================
+     RENDER: NAVEGACION DE CATEGORIAS
+     ====================================================================== */
+  function renderNav() {
+    var nav = document.getElementById("navCategories");
+    if (!nav) return;
+    nav.innerHTML = "";
+    categories.forEach(function (cat) {
+      var a = document.createElement("a");
+      a.href = "#cat-" + cat.id;
+      a.textContent = cat.name;
+      nav.appendChild(a);
+    });
+  }
+
+  /* ======================================================================
+     RENDER: CATALOGO PRINCIPAL
+     ====================================================================== */
+  function renderCatalog() {
+    var catalog = document.getElementById("catalog");
+    if (!catalog) return;
+    catalog.innerHTML = ""; // limpia el "Cargando..."
+
+    categories.forEach(function (cat) {
+      var prodsInCat = products.filter(function (p) { return p.category === cat.id; });
+      if (prodsInCat.length === 0) return; // no muestra categorias vacias
+
+      var section = document.createElement("section");
+      section.className = "category-section";
+      section.id = "cat-" + cat.id;
+
+      var title = document.createElement("h2");
+      title.className = "category-title";
+      title.textContent = cat.name;
+      section.appendChild(title);
+
+      // Descripcion opcional de la categoria (campo "description" del JSON)
+      if (cat.description) {
+        var desc = document.createElement("p");
+        desc.className = "category-desc";
+        desc.textContent = cat.description;
+        section.appendChild(desc);
+      }
+
+      var grid = document.createElement("div");
+      grid.className = "product-grid";
+
+      prodsInCat.forEach(function (p) {
+        grid.appendChild(buildProductCard(p));
+      });
+
+      section.appendChild(grid);
+      catalog.appendChild(section);
+    });
+  }
+
+  /* ======================================================================
+     CONSTRUYE UNA TARJETA DE PRODUCTO
+     ====================================================================== */
+  function buildProductCard(product) {
+    var isService = product.type === "service";
+    var card = document.createElement("article");
+    card.className = isService ? "product-card service-card" : "product-card";
+
+    var name = document.createElement("h3");
+    name.className = "product-name";
+    name.textContent = product.name;
+
+    var desc = document.createElement("p");
+    desc.className = "product-desc";
+    desc.textContent = product.description || "";
+
+    card.appendChild(name);
+    if (product.description) card.appendChild(desc);
+
+    if (isService) {
+      // Servicios: no precio, no carrito. Solo botón de contacto.
+      var note = document.createElement("p");
+      note.className = "service-note";
+      note.textContent = "No se añade al carrito. Debe coordinar horario y detalles con anticipación.";
+      card.appendChild(note);
+
+      var btn = document.createElement("button");
+      btn.className = "btn btn-primary btn-block";
+      btn.type = "button";
+      btn.textContent = "Ver cómo solicitar";
+      btn.addEventListener("click", function () {
+        showServiceModal(product);
+      });
+      card.appendChild(btn);
+    } else {
+      // Producto normal
+      var price = document.createElement("div");
+      price.className = "product-price";
+      if (product.unit) {
+        price.innerHTML =
+          formatMoney(product.price) +
+          ' <span class="product-unit">/ ' + escapeHtml(product.unit) + "</span>";
+      } else {
+        price.textContent = formatMoney(product.price);
+      }
+
+      var btn = document.createElement("button");
+      btn.className = "btn btn-primary btn-block";
+      btn.type = "button";
+      btn.textContent = "A\u00f1adir al carrito";
+      btn.addEventListener("click", function () {
+        if (global.Cart) {
+          global.Cart.addItem(product);
+          var original = btn.textContent;
+          btn.textContent = "\u2713 A\u00f1adido";
+          btn.disabled = true;
+          setTimeout(function () {
+            btn.textContent = original;
+            btn.disabled = false;
+          }, 900);
+        }
+      });
+
+      card.appendChild(price);
+      card.appendChild(btn);
+    }
+    return card;
+  }
+
+  /* ======================================================================
+     MODAL DE SERVICIOS — muestra números de contacto
+     ====================================================================== */
+  function showServiceModal(product) {
+    var overlay = document.getElementById("serviceOverlay");
+    var titleEl = document.getElementById("serviceModalTitle");
+    var bodyEl = document.getElementById("serviceModalBody");
+    if (!overlay || !titleEl || !bodyEl) {
+      // Fallback si el modal no está en el HTML
+      var contact = (global.PRODUCTS_DATA && global.PRODUCTS_DATA.serviceContact) ||
+                    (CATALOG_EMBED && CATALOG_EMBED.serviceContact) || {};
+      var msg = (product.contactText || "Coordine este servicio con anticipación.") +
+        "\n\nTeléfonos fijos: " + (contact.fijos || []).join(" · ") +
+        "\nMóviles: " + (contact.moviles || []).join(" · ");
+      alert(msg);
+      return;
+    }
+
+    titleEl.textContent = product.name;
+    var contact = (global.PRODUCTS_DATA && global.PRODUCTS_DATA.serviceContact) ||
+                  (CATALOG_EMBED && CATALOG_EMBED.serviceContact) || {};
+
+    var html = "";
+    if (product.description) {
+      html += "<p>" + escapeHtml(product.description) + "</p>";
+    }
+    html += "<p><strong>¿Qué debe hacer?</strong></p>";
+    html += "<p>" + escapeHtml(product.contactText || "Llame o escriba a los números de contacto para coordinar el servicio y el horario de antemano.") + "</p>";
+    html += "<div class=\"service-contact-box\">";
+    html += "<p><strong>Teléfonos fijos</strong><br>" + escapeHtml((contact.fijos || []).join(" · ")) + "</p>";
+    html += "<p><strong>Teléfonos móviles</strong><br>" + escapeHtml((contact.moviles || []).join(" · ")) + "</p>";
+    if (contact.note) {
+      html += "<p class=\"service-note-small\">" + escapeHtml(contact.note) + "</p>";
+    }
+    html += "</div>";
+    // Botones de llamada rápida
+    html += "<div class=\"service-call-actions\">";
+    (contact.moviles || []).forEach(function (num) {
+      var clean = String(num).replace(/\\s+/g, "").replace(/^\\+/, "");
+      html += '<a class="btn btn-primary" href="tel:+' + escapeHtml(clean) + '">Llamar ' + escapeHtml(num) + "</a>";
+    });
+    (contact.fijos || []).forEach(function (num) {
+      html += '<a class="btn btn-outline" href="tel:' + escapeHtml(String(num)) + '">Fijo ' + escapeHtml(num) + "</a>";
+    });
+    html += "</div>";
+
+    bodyEl.innerHTML = html;
+    overlay.hidden = false;
+    overlay.classList.add("is-visible");
+  }
+
+  function closeServiceModal() {
+    var overlay = document.getElementById("serviceOverlay");
+    if (!overlay) return;
+    overlay.classList.remove("is-visible");
+    setTimeout(function () { overlay.hidden = true; }, 250);
+  }
+
+  // Exponer cierre para el botón del modal
+  global.closeServiceModal = closeServiceModal;
+
+  // Cerrar al hacer clic fuera del modal o con Escape
+  document.addEventListener("DOMContentLoaded", function () {
+    var overlay = document.getElementById("serviceOverlay");
+    if (overlay) {
+      overlay.addEventListener("click", function (e) {
+        if (e.target === overlay) closeServiceModal();
+      });
+    }
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeServiceModal();
+    });
+  });
+
+  /* ======================================================================
+     UTILIDADES
+     ====================================================================== */
+
+  /**
+   * Formato monetario con 2 decimales y separador de miles.
+   * Usa la utilidad global Money (definida en cart.js, que se carga antes);
+   * si no estuviera disponible, cae a un formato simple.
+   */
+
+  function formatMoney(n) {
+    if (global.Money && typeof global.Money.format === "function") {
+      return global.Money.format(n);
+    }
+    return (Number(n) || 0).toFixed(2);
+  }
+
+  /** Escape basico de HTML para valores insertados con innerHTML. */
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  /** Muestra el mensaje de error amigable si nada funciono. */
+  function showError() {
+    var loading = document.getElementById("loadingMsg");
+    if (loading) loading.hidden = true;
+    var box = document.getElementById("errorBox");
+    if (box) box.hidden = false;
+  }
+
+  /* ======================================================================
+     API PUBLICA
+     ====================================================================== */
+  global.Products = {
+    load: load,
+    getAll: function () { return products.slice(); },
+    getCategories: function () { return categories.slice(); }
+  };
+})(window);
