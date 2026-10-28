@@ -1,18 +1,16 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Tienda online de EMAIAP — Empresa Municipal Agroindustrial Aguada de Pasajeros. Productos cárnicos, lácteos, dulces, conservas y agropecuarios. Pide por WhatsApp." />
+<html lang="es"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tienda online de EMAIAP — Empresa Municipal Agroindustrial Aguada de Pasajeros. Productos cárnicos, lácteos, dulces, conservas y agropecuarios. Pide por WhatsApp.">
   <title>EMAIAP — Tienda Online | Aguada de Pasajeros</title>
 
   <!-- Tipografías de marca: Archivo (sans) para texto, Fraunces (serif) para titulares -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&amp;family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&amp;display=swap" rel="stylesheet">
 
-  <link rel="icon" type="image/png" href="assets/logo.png" />
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
@@ -22,14 +20,12 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="#" class="brand" aria-label="Inicio">
-        <img src="assets/logo.png" alt="Logo de EMAIAP" class="brand-logo" />
+        <img src="assets/logo.png" alt="Logo de EMAIAP" class="brand-logo">
         <span class="brand-name">EMAIAP</span>
       </a>
 
       <!-- Navegación de categorías (se rellena dinámicamente) -->
-      <nav class="nav-categories" id="navCategories" aria-label="Categorías">
-        <!-- JS inyecta aquí los enlaces de categoría -->
-      </nav>
+      <nav class="nav-categories" id="navCategories" aria-label="Categorías"><a href="#cat-carnicos">Productos Cárnicos</a><a href="#cat-carnicos-mpa">Cárnicos — Materia Prima Adquirida</a><a href="#cat-otros-carnicos">Otros Productos</a><a href="#cat-lacteos-dulces">Lácteos, Dulces y Conservas</a><a href="#cat-agropecuarios">Productos Agropecuarios</a></nav>
 
       <!-- Botón del carrito -->
       <button class="cart-toggle" id="cartToggle" aria-label="Abrir carrito">
@@ -38,7 +34,7 @@
           <circle cx="20" cy="21" r="1"></circle>
           <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
         </svg>
-        <span class="cart-count" id="cartCount" aria-live="polite">0</span>
+        <span class="cart-count" id="cartCount" aria-live="polite" data-count="0">0</span>
       </button>
     </div>
   </header>
@@ -55,13 +51,10 @@
     </section>
 
     <!-- Contenedor de categorías y productos (lo rellena products.js) -->
-    <div id="catalog" class="catalog">
-      <!-- Mientras carga mostramos un mensaje -->
-      <p class="loading-msg" id="loadingMsg">Cargando productos…</p>
-    </div>
+    <div id="catalog" class="catalog"><section class="category-section" id="cat-carnicos"><h2 class="category-title">Productos Cárnicos</h2><p class="category-desc">Oferta de productos cárnicos de la empresa. Precios en Moneda Nacional (CUP).</p><div class="product-grid"><article class="product-card"><h3 class="product-name">Ternilla</h3><p class="product-desc">Carne de res joven en cortes listos para elaborar.</p><div class="product-price">200.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Hueso Rojo</h3><p class="product-desc">Hueso de res con médula roja, ideal para caldos y sopas.</p><div class="product-price">200.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Hueso Blanco</h3><p class="product-desc">Hueso de res para caldos, precio por kilogramo.</p><div class="product-price">100.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Patas</h3><p class="product-desc">Patas de res, base para caldos y gelatinas naturales.</p><div class="product-price">15.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Masa de Hamburguesa</h3><p class="product-desc">Masa condimentada lista para formar hamburguesas.</p><div class="product-price">710.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Masa Chorizo</h3><p class="product-desc">Masa de chorizo condimentada lista para embutir.</p><div class="product-price">1,000.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Masa Jamón</h3><p class="product-desc">Masa para la elaboración de jamón.</p><div class="product-price">1,200.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Hígado</h3><p class="product-desc">Hígado de res fresco, rico en hierro.</p><div class="product-price">800.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Mortadella</h3><p class="product-desc">Embutido tipo mortadella, precio por kilogramo.</p><div class="product-price">1,200.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Chorizo</h3><p class="product-desc">Chorizo elaborado en la empresa.</p><div class="product-price">1,450.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Corazón</h3><p class="product-desc">Corazón de res fresco.</p><div class="product-price">800.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Lengua</h3><p class="product-desc">Lengua de res lista para cocinar.</p><div class="product-price">800.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Jabón de Lavar</h3><p class="product-desc">Jabón de lavar producido por la empresa.</p><div class="product-price">100.00 <span class="product-unit">/ U</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Bofe</h3><p class="product-desc">Bofe (pulmón) de res fresco.</p><div class="product-price">25.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Pitrafa</h3><p class="product-desc">Pitrafa de res fresca.</p><div class="product-price">50.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Riñón</h3><p class="product-desc">Riñón de res fresco.</p><div class="product-price">50.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Rabo Troceado</h3><p class="product-desc">Rabo de res troceado, ideal para sopas y guisos.</p><div class="product-price">250.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Jamonada</h3><p class="product-desc">Jamonada elaborada en la empresa.</p><div class="product-price">1,300.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Panza</h3><p class="product-desc">Panza de res, precio por unidad (Anexo 1, tabla principal).</p><div class="product-price">150.00 <span class="product-unit">/ U</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article></div></section><section class="category-section" id="cat-carnicos-mpa"><h2 class="category-title">Cárnicos — Materia Prima Adquirida</h2><p class="category-desc">Productos cárnicos con materia prima adquirida o de sobrecumplimiento.</p><div class="product-grid"><article class="product-card"><h3 class="product-name">Cortes varios de Res Primera</h3><p class="product-desc">Selección de cortes de res de primera calidad.</p><div class="product-price">2,250.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Picadillo de Res Primera</h3><p class="product-desc">Picadillo de res de primera calidad.</p><div class="product-price">1,600.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Cortes varios de Res Segunda</h3><p class="product-desc">Cortes de res de segunda calidad a mejor precio.</p><div class="product-price">1,830.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Picadillo de Res Segunda</h3><p class="product-desc">Picadillo de res de segunda calidad.</p><div class="product-price">710.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Hígado de Res</h3><p class="product-desc">Hígado de res con materia prima adquirida.</p><div class="product-price">800.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Rabo Troceado Res</h3><p class="product-desc">Rabo de res troceado, materia prima adquirida.</p><div class="product-price">800.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Lengua Res</h3><p class="product-desc">Lengua de res, materia prima adquirida.</p><div class="product-price">800.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Corazón Res</h3><p class="product-desc">Corazón de res, materia prima adquirida.</p><div class="product-price">800.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Conejo Canal (Calidad Única)</h3><p class="product-desc">Conejo en canal, calidad única.</p><div class="product-price">1,800.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Ovino Canal (Calidad Única)</h3><p class="product-desc">Ovino en canal, calidad única.</p><div class="product-price">2,800.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Pollo</h3><p class="product-desc">Pollo fresco, precio por kilogramo.</p><div class="product-price">2,300.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Carne de Res en Banda</h3><p class="product-desc">Carne de res en banda, sin deshuesar.</p><div class="product-price">2,000.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article></div></section><section class="category-section" id="cat-otros-carnicos"><h2 class="category-title">Otros Productos</h2><p class="category-desc">Otros productos disponibles de la sección cárnica.</p><div class="product-grid"><article class="product-card"><h3 class="product-name">Panza</h3><p class="product-desc">Panza de res listada en Otros Productos de la sección cárnica. Precio por unidad.</p><div class="product-price">1,300.00 <span class="product-unit">/ U</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Morcilla</h3><p class="product-desc">Morcilla elaborada en la empresa.</p><div class="product-price">150.00 <span class="product-unit">/ U</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Sangre</h3><p class="product-desc">Sangre de res para platos tradicionales.</p><div class="product-price">50.00 <span class="product-unit">/ U</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Cueros</h3><p class="product-desc">Cuero de res, precio por unidad.</p><div class="product-price">30.00 <span class="product-unit">/ U</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Sebo</h3><p class="product-desc">Sebo, precio por litro.</p><div class="product-price">50.00 <span class="product-unit">/ LITRO</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Picadillo Especial</h3><p class="product-desc">Picadillo especial de alta calidad, precio por unidad.</p><div class="product-price">2,000.00 <span class="product-unit">/ U</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Salchicha</h3><p class="product-desc">Salchicha elaborada en la empresa.</p><div class="product-price">1,500.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article></div></section><section class="category-section" id="cat-lacteos-dulces"><h2 class="category-title">Lácteos, Dulces y Conservas</h2><p class="category-desc">Producción de la mini industria láctea, dulces y conservas. M.P.A. = materia prima adquirida.</p><div class="product-grid"><article class="product-card"><h3 class="product-name">Yogurt Natural</h3><p class="product-desc">Yogurt natural de la mini industria láctea.</p><div class="product-price">350.00 <span class="product-unit">/ LITRO</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Vinagre</h3><p class="product-desc">Vinagre producido en la mini industria.</p><div class="product-price">300.00 <span class="product-unit">/ LITRO</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Queso</h3><p class="product-desc">Queso fresco de producción propia.</p><div class="product-price">350.00 <span class="product-unit">/ LIBRA</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Yogurt Natural (M.P.A.)</h3><p class="product-desc">Yogurt natural elaborado con materia prima adquirida.</p><div class="product-price">420.00 <span class="product-unit">/ LITRO</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Queso (M.P.A.)</h3><p class="product-desc">Queso elaborado con materia prima adquirida.</p><div class="product-price">400.00 <span class="product-unit">/ LIBRA</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article></div></section><section class="category-section" id="cat-agropecuarios"><h2 class="category-title">Productos Agropecuarios</h2><p class="category-desc">Viandas, hortalizas, frutas, granos y otros. Oferta pendiente de concertación: los precios pueden variar.</p><div class="product-grid"><article class="product-card"><h3 class="product-name">Boniato</h3><p class="product-desc">Vianda fresca beneficiada, lista para cocinar.</p><div class="product-price">180.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Yuca pelada congelada</h3><p class="product-desc">Yuca pelada y congelada, lista para su uso.</p><div class="product-price">200.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Calabaza beneficiada</h3><p class="product-desc">Calabaza limpia y beneficiada.</p><div class="product-price">160.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Plátano fruta manzano</h3><p class="product-desc">Plátano manzano desmanado y beneficiado.</p><div class="product-price">175.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Plátano fruta</h3><p class="product-desc">Plátano fruta desmanado y beneficiado.</p><div class="product-price">185.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Plátano burro</h3><p class="product-desc">Plátano burro desmanado y beneficiado.</p><div class="product-price">145.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Plátano vianda</h3><p class="product-desc">Plátano vianda desmanado y beneficiado.</p><div class="product-price">200.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Malanga Colocasia</h3><p class="product-desc">Malanga colocasia beneficiada.</p><div class="product-price">175.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Malanga Xantosoma</h3><p class="product-desc">Malanga xantosoma beneficiada.</p><div class="product-price">185.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Frijol Negro</h3><p class="product-desc">Frijol negro seleccionado.</p><div class="product-price">1,050.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Frijol Colorado</h3><p class="product-desc">Frijol colorado seleccionado.</p><div class="product-price">1,150.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Frijol Blanco</h3><p class="product-desc">Frijol blanco seleccionado.</p><div class="product-price">1,200.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Frutabomba madura</h3><p class="product-desc">Frutabomba beneficiada y madura.</p><div class="product-price">145.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Guayaba</h3><p class="product-desc">Guayaba beneficiada.</p><div class="product-price">155.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Limón Primera</h3><p class="product-desc">Limón de primera calidad.</p><div class="product-price">900.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Limón Segunda</h3><p class="product-desc">Limón de segunda calidad.</p><div class="product-price">740.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Mango Primera</h3><p class="product-desc">Mango de primera calidad.</p><div class="product-price">140.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Mango Segunda</h3><p class="product-desc">Mango de segunda calidad.</p><div class="product-price">120.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Melón Primera</h3><p class="product-desc">Melón de primera calidad.</p><div class="product-price">165.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Melón Segunda</h3><p class="product-desc">Melón de segunda calidad.</p><div class="product-price">150.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Piña Primera</h3><p class="product-desc">Piña de primera calidad.</p><div class="product-price">170.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Piña Segunda</h3><p class="product-desc">Piña de segunda calidad.</p><div class="product-price">155.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Toronja Primera</h3><p class="product-desc">Toronja de primera calidad.</p><div class="product-price">200.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Toronja Segunda</h3><p class="product-desc">Toronja de segunda calidad.</p><div class="product-price">190.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Níspero Primera</h3><p class="product-desc">Níspero de primera calidad.</p><div class="product-price">230.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Níspero Segunda</h3><p class="product-desc">Níspero de segunda calidad.</p><div class="product-price">215.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Carbón Vegetal</h3><p class="product-desc">Carbón vegetal, precio por kilogramo.</p><div class="product-price">130.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Carbón Marabú Primera</h3><p class="product-desc">Carbón de marabú clasificado de primera calidad.</p><div class="product-price">86.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Carbón Mezcla Marabú</h3><p class="product-desc">Carbón de marabú clasificado: 70% primera + 30% segunda.</p><div class="product-price">117.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Carbón Precio Diferenciado</h3><p class="product-desc">Carbón con precio diferenciado.</p><div class="product-price">1,600.00 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article><article class="product-card"><h3 class="product-name">Arroz de Consumo</h3><p class="product-desc">Arroz de consumo nacional.</p><div class="product-price">760.87 <span class="product-unit">/ KG</span></div><button class="btn btn-primary btn-block" type="button">Añadir al carrito</button></article></div></section></div>
 
     <!-- Mensaje de error amigable si ni el JSON ni el respaldo cargan -->
-    <div id="errorBox" class="error-box" hidden>
+    <div id="errorBox" class="error-box" hidden="">
       <strong>No pudimos cargar los productos.</strong>
       <p>Verifica que existan los archivos data/products.json y data/products.js, y vuelve a intentarlo. Si el problema persiste, contacta al administrador del sitio.</p>
     </div>
@@ -83,7 +76,7 @@
           <div class="contacto-lista">
             <div class="contacto-item">
               <span class="ico" aria-hidden="true">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
               </span>
               <div>
                 <strong>Dirección</strong>
@@ -93,7 +86,7 @@
 
             <div class="contacto-item">
               <span class="ico" aria-hidden="true">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
               </span>
               <div>
                 <strong>Teléfonos fijos</strong>
@@ -103,7 +96,7 @@
 
             <div class="contacto-item">
               <span class="ico" aria-hidden="true">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12" y2="18"></line></svg>
               </span>
               <div>
                 <strong>Móviles</strong>
@@ -121,7 +114,7 @@
               <span class="tarjeta-moneda">CUP</span>
               <span class="tarjeta-num">1245-4210-9542-7542</span>
               <button type="button" class="btn-copiar" data-copy="1245-4210-9542-7542" aria-label="Copiar número de tarjeta CUP">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
               </button>
             </div>
 
@@ -129,7 +122,7 @@
               <span class="tarjeta-moneda">USD</span>
               <span class="tarjeta-num">1245-4070-7542-0035</span>
               <button type="button" class="btn-copiar" data-copy="1245-4070-7542-0035" aria-label="Copiar número de tarjeta USD">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
               </button>
             </div>
 
@@ -143,35 +136,32 @@
   <!-- ============================ -->
   <!-- CARRITO LATERAL (DRAWER)     -->
   <!-- ============================ -->
-  <div class="cart-overlay" id="cartOverlay" hidden></div>
+  <div class="cart-overlay" id="cartOverlay" hidden=""></div>
   <aside class="cart-drawer" id="cartDrawer" aria-label="Carrito de compras" aria-hidden="true">
     <div class="cart-header">
       <h2>Tu carrito</h2>
-      <button class="cart-close" id="cartClose" aria-label="Cerrar carrito">&times;</button>
+      <button class="cart-close" id="cartClose" aria-label="Cerrar carrito">×</button>
     </div>
 
-    <div class="cart-body" id="cartBody">
-      <!-- JS inyecta aquí los items del carrito -->
-      <p class="cart-empty" id="cartEmpty">Tu carrito está vacío.</p>
-    </div>
+    <div class="cart-body" id="cartBody"><p class="cart-empty" id="cartEmpty">Tu carrito está vacío.</p></div>
 
     <div class="cart-footer">
       <div class="cart-total">
         <span>Total:</span>
         <strong id="cartTotal">$0.00</strong>
       </div>
-      <button class="btn btn-primary btn-block" id="checkoutBtn" disabled>Finalizar compra</button>
+      <button class="btn btn-primary btn-block" id="checkoutBtn" disabled="">Finalizar compra</button>
     </div>
   </aside>
 
   <!-- ============================ -->
   <!-- MODAL DE CHECKOUT            -->
   <!-- ============================ -->
-  <div class="modal-overlay" id="checkoutOverlay" hidden>
+  <div class="modal-overlay" id="checkoutOverlay" hidden="">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
       <div class="modal-header">
         <h2 id="checkoutTitle">Finalizar compra</h2>
-        <button class="modal-close" id="checkoutClose" aria-label="Cerrar">&times;</button>
+        <button class="modal-close" id="checkoutClose" aria-label="Cerrar">×</button>
       </div>
 
       <div class="modal-body">
@@ -180,11 +170,11 @@
           <!-- JS inyecta aquí el resumen -->
         </div>
 
-        <form id="checkoutForm" class="checkout-form" novalidate>
+        <form id="checkoutForm" class="checkout-form" novalidate="">
           <!-- Nombre opcional -->
           <div class="form-group">
             <label for="customerName">Nombre (opcional)</label>
-            <input type="text" id="customerName" name="customerName" placeholder="Ej. María Pérez" autocomplete="name" />
+            <input type="text" id="customerName" name="customerName" placeholder="Ej. María Pérez" autocomplete="name">
           </div>
 
           <!-- Método de pago -->
@@ -192,19 +182,19 @@
             <span class="form-label">Método de pago</span>
             <div class="payment-options" id="paymentOptions">
               <label class="payment-option">
-                <input type="radio" name="payment" value="Transfermóvil" required />
+                <input type="radio" name="payment" value="Transfermóvil" required="">
                 <span>Transfermóvil</span>
               </label>
               <label class="payment-option">
-                <input type="radio" name="payment" value="Zelle" />
+                <input type="radio" name="payment" value="Zelle">
                 <span>Zelle</span>
               </label>
               <label class="payment-option">
-                <input type="radio" name="payment" value="PayPal" />
+                <input type="radio" name="payment" value="PayPal">
                 <span>PayPal</span>
               </label>
               <label class="payment-option">
-                <input type="radio" name="payment" value="Pago en efectivo" />
+                <input type="radio" name="payment" value="Pago en efectivo">
                 <span>Pago en efectivo</span>
               </label>
             </div>
@@ -226,10 +216,10 @@
   <!-- ============================ -->
   <!-- MODAL DE CONFIRMACIÓN        -->
   <!-- ============================ -->
-  <div class="modal-overlay" id="confirmOverlay" hidden>
+  <div class="modal-overlay" id="confirmOverlay" hidden="">
     <div class="modal modal-confirm" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
       <div class="confirm-logo">
-        <img src="assets/logo.png" alt="Logo de EMAIAP" />
+        <img src="assets/logo.png" alt="Logo de EMAIAP">
       </div>
       <h2 id="confirmTitle">¡Pedido enviado!</h2>
       <p class="confirm-text">
@@ -243,12 +233,31 @@
   <!-- ============================ -->
   <!-- FOOTER                       -->
   <!-- ============================ -->
-  <footer class="site-footer">
+  
+  <!-- ============================ -->
+  <!-- MODAL DE SERVICIOS           -->
+  <!-- ============================ -->
+  <div class="modal-overlay" id="serviceOverlay" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="serviceModalTitle">
+      <div class="modal-header">
+        <h2 id="serviceModalTitle">Servicio</h2>
+        <button class="modal-close" type="button" aria-label="Cerrar" onclick="window.closeServiceModal && window.closeServiceModal()">×</button>
+      </div>
+      <div class="modal-body" id="serviceModalBody">
+        <!-- Contenido generado por JS -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary btn-block" type="button" onclick="window.closeServiceModal && window.closeServiceModal()">Entendido</button>
+      </div>
+    </div>
+  </div>
+
+<footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
         <!-- Columna 1: marca + descripción -->
         <div class="footer-brand">
-          <img src="assets/logo.png" alt="Logo de EMAIAP" class="footer-logo" />
+          <img src="assets/logo.png" alt="Logo de EMAIAP" class="footer-logo">
           <div>
             <strong>Agroindustrial<br>Aguada de Pasajeros</strong>
             <p>Empresa Municipal Agroindustrial Aguada de Pasajeros. Producción agropecuaria, combos alimenticios y servicios técnicos para el municipio.</p>
@@ -260,15 +269,15 @@
           <h4>Contacto</h4>
           <ul>
             <li>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
               <span>Calle 2da entre 1ra y 3ra, No. 57, Perseverancia</span>
             </li>
             <li>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
               <span>43569143 · 43569137</span>
             </li>
             <li>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12" y2="18"></line></svg>
               <span>52098083 · 52117036</span>
             </li>
           </ul>
@@ -286,9 +295,9 @@
 
       <!-- Fila final: copyright + botón del equipo desarrollador -->
       <div class="footer-final">
-        <p>&copy; <span id="year"></span> EMAIAP · Empresa Municipal Agroindustrial Aguada de Pasajeros. Todos los derechos reservados.</p>
+        <p>© <span id="year">2026</span> EMAIAP · Empresa Municipal Agroindustrial Aguada de Pasajeros. Todos los derechos reservados.</p>
         <a class="btn-equipo" href="https://helsing22.github.io/TwinCodeLandingPage/" target="_blank" rel="noopener noreferrer">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
           Desarrollado por <strong>TwinCode</strong>
         </a>
       </div>
@@ -308,5 +317,6 @@
   <script src="js/cart.js"></script>
   <script src="js/products.js"></script>
   <script src="js/app.js"></script>
-</body>
-</html>
+
+
+</body></html>

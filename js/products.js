@@ -1,37 +1,5 @@
-/* ==========================================================================
-   products.js — Carga y render del catálogo
-   --------------------------------------------------------------------------
-   ESTRATEGIA DE CARGA (3 capas, fail-safe):
-     1) Si existe window.PRODUCTS_DATA (cargada por data/products.js como
-        <script> en el HTML), la usa directamente. Es el camino mas rapido
-        y funciona en file://, http:// y https://.
-     2) Si no, intenta descargar data/products.json con fetch().
-        Funciona en GitHub Pages y en cualquier servidor HTTP.
-     3) Si fetch() tambien falla, usa el catalogo EMBEBIDO en este archivo
-        (CATALOG_EMBED, mas abajo). Garantia absoluta de que la tienda
-        siempre muestre productos aunque el navegador bloquee fetch() Y
-        data/products.js no se haya cargado.
-     4) Solo si todo lo anterior falla, muestra el mensaje de error (#errorBox).
-
-   MANTENIMIENTO: edita data/products.json y vuelve a ejecutar
-   python scripts/sync_products_js.py (o pega el JSON nuevo en CATALOG_EMBED).
-   ========================================================================== */
-
-(function (global) {
-  "use strict";
-
-  var DATA_URL = "data/products.json";
-
-  var categories = [];
-  var products = [];
-
-  /* ======================================================================
-     CATALOGO EMBEDIDO — copia literal de data/products.json
-     ======================================================================
-     Ultima linea de defensa: si ni fetch() ni window.PRODUCTS_DATA estan
-     disponibles, este literal garantiza que los productos se muestren.
-     ====================================================================== */
-  var CATALOG_EMBED = {
+/* Fallback catalog data for file:// and offline — synced from products.json */
+window.PRODUCTS_DATA = {
   "categories": [
     {
       "id": "carnicos",
@@ -46,22 +14,28 @@
       "description": "Productos cárnicos con materia prima adquirida o de sobrecumplimiento."
     },
     {
-      "id": "otros-carnicos",
-      "name": "Otros Productos",
-      "order": 3,
-      "description": "Otros productos disponibles de la sección cárnica."
-    },
-    {
       "id": "lacteos-dulces",
       "name": "Lácteos, Dulces y Conservas",
+      "order": 3,
+      "description": "Producción de la mini industria láctea, dulces y conservas."
+    },
+    {
+      "id": "lacteos-mpa",
+      "name": "Lácteos — Materia Prima Adquirida",
       "order": 4,
-      "description": "Producción de la mini industria láctea, dulces y conservas. M.P.A. = materia prima adquirida."
+      "description": "Productos de la mini industria láctea, dulces y conservas con materia prima adquirida o de sobrecumplimiento."
     },
     {
       "id": "agropecuarios",
       "name": "Productos Agropecuarios",
       "order": 5,
       "description": "Viandas, hortalizas, frutas, granos y otros. Oferta pendiente de concertación: los precios pueden variar."
+    },
+    {
+      "id": "servicios",
+      "name": "Servicios",
+      "order": 6,
+      "description": "Servicios de la empresa. No se añaden al carrito: debe coordinar horario y detalles con anticipación llamando a los números de contacto."
     }
   ],
   "products": [
@@ -162,7 +136,7 @@
       "description": "Lengua de res lista para cocinar."
     },
     {
-      "id": "carn-jabon-lavar",
+      "id": "carn-jabon",
       "name": "Jabón de Lavar",
       "price": 100.0,
       "category": "carnicos",
@@ -180,7 +154,7 @@
     {
       "id": "carn-pitrafa",
       "name": "Pitrafa",
-      "price": 50.0,
+      "price": 25.0,
       "category": "carnicos",
       "unit": "KG",
       "description": "Pitrafa de res fresca."
@@ -194,7 +168,7 @@
       "description": "Riñón de res fresco."
     },
     {
-      "id": "carn-rabo-troceado",
+      "id": "carn-rabo",
       "name": "Rabo Troceado",
       "price": 250.0,
       "category": "carnicos",
@@ -215,10 +189,58 @@
       "price": 150.0,
       "category": "carnicos",
       "unit": "U",
-      "description": "Panza de res, precio por unidad (Anexo 1, tabla principal)."
+      "description": "Panza de res, precio por unidad."
     },
     {
-      "id": "mpa-cortes-res-primera",
+      "id": "carn-morcilla",
+      "name": "Morcilla",
+      "price": 950.0,
+      "category": "carnicos",
+      "unit": "KG",
+      "description": "Morcilla elaborada en la empresa."
+    },
+    {
+      "id": "carn-sangre",
+      "name": "Sangre",
+      "price": 50.0,
+      "category": "carnicos",
+      "unit": "LIT",
+      "description": "Sangre de res, precio por litro."
+    },
+    {
+      "id": "carn-sebo",
+      "name": "Sebo",
+      "price": 30.0,
+      "category": "carnicos",
+      "unit": "KG",
+      "description": "Sebo de res."
+    },
+    {
+      "id": "carn-cueros",
+      "name": "Cueros",
+      "price": 2000.0,
+      "category": "carnicos",
+      "unit": "U",
+      "description": "Cueros de res, precio por unidad."
+    },
+    {
+      "id": "carn-picadillo-especial",
+      "name": "Picadillo Especial",
+      "price": 1500.0,
+      "category": "carnicos",
+      "unit": "KG",
+      "description": "Picadillo especial elaborado en la empresa."
+    },
+    {
+      "id": "carn-salchichas",
+      "name": "Salchichas",
+      "price": 2500.0,
+      "category": "carnicos",
+      "unit": "KG",
+      "description": "Salchichas elaboradas en la empresa."
+    },
+    {
+      "id": "mpa-cortes-1",
       "name": "Cortes varios de Res Primera",
       "price": 2250.0,
       "category": "carnicos-mpa",
@@ -226,23 +248,23 @@
       "description": "Selección de cortes de res de primera calidad."
     },
     {
-      "id": "mpa-picadillo-res-primera",
+      "id": "mpa-picadillo-1",
       "name": "Picadillo de Res Primera",
-      "price": 1600.0,
+      "price": 1500.0,
       "category": "carnicos-mpa",
       "unit": "KG",
       "description": "Picadillo de res de primera calidad."
     },
     {
-      "id": "mpa-cortes-res-segunda",
+      "id": "mpa-cortes-2",
       "name": "Cortes varios de Res Segunda",
       "price": 1830.0,
       "category": "carnicos-mpa",
       "unit": "KG",
-      "description": "Cortes de res de segunda calidad a mejor precio."
+      "description": "Cortes de res de segunda calidad."
     },
     {
-      "id": "mpa-picadillo-res-segunda",
+      "id": "mpa-picadillo-2",
       "name": "Picadillo de Res Segunda",
       "price": 710.0,
       "category": "carnicos-mpa",
@@ -250,199 +272,143 @@
       "description": "Picadillo de res de segunda calidad."
     },
     {
-      "id": "mpa-higado-res",
+      "id": "mpa-higado",
       "name": "Hígado de Res",
       "price": 800.0,
       "category": "carnicos-mpa",
       "unit": "KG",
-      "description": "Hígado de res con materia prima adquirida."
+      "description": "Hígado de res."
     },
     {
-      "id": "mpa-rabo-troceado-res",
+      "id": "mpa-rabo",
       "name": "Rabo Troceado Res",
-      "price": 800.0,
+      "price": 600.0,
       "category": "carnicos-mpa",
       "unit": "KG",
-      "description": "Rabo de res troceado, materia prima adquirida."
+      "description": "Rabo de res troceado."
     },
     {
-      "id": "mpa-lengua-res",
+      "id": "mpa-lengua",
       "name": "Lengua Res",
       "price": 800.0,
       "category": "carnicos-mpa",
       "unit": "KG",
-      "description": "Lengua de res, materia prima adquirida."
+      "description": "Lengua de res."
     },
     {
-      "id": "mpa-corazon-res",
+      "id": "mpa-corazon",
       "name": "Corazón Res",
       "price": 800.0,
       "category": "carnicos-mpa",
       "unit": "KG",
-      "description": "Corazón de res, materia prima adquirida."
-    },
-    {
-      "id": "mpa-conejo-canal",
-      "name": "Conejo Canal (Calidad Única)",
-      "price": 1800.0,
-      "category": "carnicos-mpa",
-      "unit": "KG",
-      "description": "Conejo en canal, calidad única."
-    },
-    {
-      "id": "mpa-ovino-canal",
-      "name": "Ovino Canal (Calidad Única)",
-      "price": 2800.0,
-      "category": "carnicos-mpa",
-      "unit": "KG",
-      "description": "Ovino en canal, calidad única."
+      "description": "Corazón de res."
     },
     {
       "id": "mpa-pollo",
       "name": "Pollo",
-      "price": 2300.0,
+      "price": 1800.0,
       "category": "carnicos-mpa",
       "unit": "KG",
-      "description": "Pollo fresco, precio por kilogramo."
+      "description": "Pollo."
     },
     {
-      "id": "mpa-res-en-banda",
+      "id": "mpa-conejo",
+      "name": "Conejo Canal Calidad Única",
+      "price": 2000.0,
+      "category": "carnicos-mpa",
+      "unit": "KG",
+      "description": "Conejo canal calidad única."
+    },
+    {
+      "id": "mpa-ovino",
+      "name": "Ovino Canal Calidad Única",
+      "price": 2500.0,
+      "category": "carnicos-mpa",
+      "unit": "KG",
+      "description": "Ovino canal calidad única."
+    },
+    {
+      "id": "mpa-banda",
       "name": "Carne de Res en Banda",
       "price": 2000.0,
       "category": "carnicos-mpa",
       "unit": "KG",
-      "description": "Carne de res en banda, sin deshuesar."
+      "description": "Carne de res en banda."
     },
     {
-      "id": "otros-panza",
-      "name": "Panza",
-      "price": 1300.0,
-      "category": "otros-carnicos",
-      "unit": "U",
-      "description": "Panza de res listada en Otros Productos de la sección cárnica. Precio por unidad."
-    },
-    {
-      "id": "otros-morcilla",
-      "name": "Morcilla",
-      "price": 150.0,
-      "category": "otros-carnicos",
-      "unit": "U",
-      "description": "Morcilla elaborada en la empresa."
-    },
-    {
-      "id": "otros-sangre",
-      "name": "Sangre",
-      "price": 50.0,
-      "category": "otros-carnicos",
-      "unit": "U",
-      "description": "Sangre de res para platos tradicionales."
-    },
-    {
-      "id": "otros-cueros",
-      "name": "Cueros",
-      "price": 30.0,
-      "category": "otros-carnicos",
-      "unit": "U",
-      "description": "Cuero de res, precio por unidad."
-    },
-    {
-      "id": "otros-sebo",
-      "name": "Sebo",
-      "price": 50.0,
-      "category": "otros-carnicos",
-      "unit": "LITRO",
-      "description": "Sebo, precio por litro."
-    },
-    {
-      "id": "otros-picadillo-especial",
-      "name": "Picadillo Especial",
-      "price": 2000.0,
-      "category": "otros-carnicos",
-      "unit": "U",
-      "description": "Picadillo especial de alta calidad, precio por unidad."
-    },
-    {
-      "id": "otros-salchicha",
-      "name": "Salchicha",
-      "price": 1500.0,
-      "category": "otros-carnicos",
-      "unit": "KG",
-      "description": "Salchicha elaborada en la empresa."
-    },
-    {
-      "id": "lac-yogurt-natural",
+      "id": "lact-yogurt",
       "name": "Yogurt Natural",
       "price": 350.0,
       "category": "lacteos-dulces",
-      "unit": "LITRO",
+      "unit": "LIT",
       "description": "Yogurt natural de la mini industria láctea."
     },
     {
-      "id": "lac-vinagre",
+      "id": "lact-vinagre",
       "name": "Vinagre",
       "price": 300.0,
       "category": "lacteos-dulces",
-      "unit": "LITRO",
-      "description": "Vinagre producido en la mini industria."
+      "unit": "LIT",
+      "description": "Vinagre producido en la empresa."
     },
     {
-      "id": "lac-queso",
+      "id": "lact-queso",
       "name": "Queso",
-      "price": 350.0,
+      "price": 390.0,
       "category": "lacteos-dulces",
-      "unit": "LIBRA",
-      "description": "Queso fresco de producción propia."
+      "unit": "LIB",
+      "description": "Queso de la mini industria láctea."
     },
     {
-      "id": "lac-yogurt-natural-mpa",
+      "id": "lact-mpa-yogurt",
       "name": "Yogurt Natural (M.P.A.)",
       "price": 420.0,
-      "category": "lacteos-dulces",
-      "unit": "LITRO",
-      "description": "Yogurt natural elaborado con materia prima adquirida."
+      "category": "lacteos-mpa",
+      "unit": "LIT",
+      "description": "Yogurt natural con materia prima adquirida o de sobrecumplimiento."
     },
     {
-      "id": "lac-queso-mpa",
+      "id": "lact-mpa-queso",
       "name": "Queso (M.P.A.)",
       "price": 400.0,
-      "category": "lacteos-dulces",
-      "unit": "LIBRA",
-      "description": "Queso elaborado con materia prima adquirida."
+      "category": "lacteos-mpa",
+      "unit": "LIB",
+      "description": "Queso con materia prima adquirida o de sobrecumplimiento."
     },
     {
-      "id": "agr-boniato",
+      "id": "agro-boniato",
       "name": "Boniato",
       "price": 180.0,
       "category": "agropecuarios",
       "unit": "KG",
-      "description": "Vianda fresca beneficiada, lista para cocinar."
+      "description": "Boniato."
     },
     {
-      "id": "agr-yuca-pelada",
+      "id": "agro-yuca",
       "name": "Yuca pelada congelada",
       "price": 200.0,
       "category": "agropecuarios",
       "unit": "KG",
-      "description": "Yuca pelada y congelada, lista para su uso."
+      "description": "Yuca pelada y congelada."
     },
     {
-      "id": "agr-calabaza",
+      "id": "agro-calabaza",
       "name": "Calabaza beneficiada",
       "price": 160.0,
       "category": "agropecuarios",
       "unit": "KG",
-      "description": "Calabaza limpia y beneficiada."
+      "description": "Calabaza beneficiada."
     },
     {
-      "id": "agr-platano-manzano",
+      "id": "agro-platano-manzano",
       "name": "Plátano fruta manzano",
       "price": 175.0,
       "category": "agropecuarios",
       "unit": "KG",
-      "description": "Plátano manzano desmanado y beneficiado."
+      "description": "Plátano fruta manzano desmanado y beneficiado."
     },
     {
-      "id": "agr-platano-fruta",
+      "id": "agro-platano-fruta",
       "name": "Plátano fruta",
       "price": 185.0,
       "category": "agropecuarios",
@@ -450,7 +416,7 @@
       "description": "Plátano fruta desmanado y beneficiado."
     },
     {
-      "id": "agr-platano-burro",
+      "id": "agro-platano-burro",
       "name": "Plátano burro",
       "price": 145.0,
       "category": "agropecuarios",
@@ -458,7 +424,7 @@
       "description": "Plátano burro desmanado y beneficiado."
     },
     {
-      "id": "agr-platano-vianda",
+      "id": "agro-platano-vianda",
       "name": "Plátano vianda",
       "price": 200.0,
       "category": "agropecuarios",
@@ -466,79 +432,79 @@
       "description": "Plátano vianda desmanado y beneficiado."
     },
     {
-      "id": "agr-malanga-colocasia",
-      "name": "Malanga Colocasia",
+      "id": "agro-malanga-colocasia",
+      "name": "Malanga colocasia",
       "price": 175.0,
       "category": "agropecuarios",
       "unit": "KG",
       "description": "Malanga colocasia beneficiada."
     },
     {
-      "id": "agr-malanga-xantosoma",
-      "name": "Malanga Xantosoma",
+      "id": "agro-malanga-xantosoma",
+      "name": "Malanga xantosoma",
       "price": 185.0,
       "category": "agropecuarios",
       "unit": "KG",
       "description": "Malanga xantosoma beneficiada."
     },
     {
-      "id": "agr-frijol-negro",
-      "name": "Frijol Negro",
+      "id": "agro-frijol-negro",
+      "name": "Frijol negro",
       "price": 1050.0,
       "category": "agropecuarios",
       "unit": "KG",
-      "description": "Frijol negro seleccionado."
+      "description": "Frijol negro."
     },
     {
-      "id": "agr-frijol-colorado",
-      "name": "Frijol Colorado",
+      "id": "agro-frijol-colorado",
+      "name": "Frijol colorado",
       "price": 1150.0,
       "category": "agropecuarios",
       "unit": "KG",
-      "description": "Frijol colorado seleccionado."
+      "description": "Frijol colorado."
     },
     {
-      "id": "agr-frijol-blanco",
-      "name": "Frijol Blanco",
+      "id": "agro-frijol-blanco",
+      "name": "Frijol blanco",
       "price": 1200.0,
       "category": "agropecuarios",
       "unit": "KG",
-      "description": "Frijol blanco seleccionado."
+      "description": "Frijol blanco."
     },
     {
-      "id": "agr-frutabomba",
-      "name": "Frutabomba madura",
+      "id": "agro-frutabomba",
+      "name": "Fruta bomba madura",
       "price": 145.0,
       "category": "agropecuarios",
       "unit": "KG",
-      "description": "Frutabomba beneficiada y madura."
+      "description": "Fruta bomba beneficiada madura."
     },
     {
-      "id": "agr-guayaba",
-      "name": "Guayaba",
+      "id": "agro-guayaba",
+      "name": "Guayaba beneficiada",
       "price": 155.0,
       "category": "agropecuarios",
       "unit": "KG",
       "description": "Guayaba beneficiada."
     },
     {
-      "id": "agr-limon-primera",
+      "id": "agro-limon-1",
       "name": "Limón Primera",
-      "price": 900.0,
+      "price": 950.0,
       "category": "agropecuarios",
       "unit": "KG",
       "description": "Limón de primera calidad."
     },
     {
-      "id": "agr-limon-segunda",
+      "id": "agro-limon-2",
       "name": "Limón Segunda",
-      "price": 740.0,
+      "price": 900.0,
       "category": "agropecuarios",
       "unit": "KG",
       "description": "Limón de segunda calidad."
     },
     {
-      "id": "agr-mango-primera",
+      "id": "agro-mango-1",
       "name": "Mango Primera",
       "price": 140.0,
       "category": "agropecuarios",
@@ -546,7 +512,7 @@
       "description": "Mango de primera calidad."
     },
     {
-      "id": "agr-mango-segunda",
+      "id": "agro-mango-2",
       "name": "Mango Segunda",
       "price": 120.0,
       "category": "agropecuarios",
@@ -554,7 +520,7 @@
       "description": "Mango de segunda calidad."
     },
     {
-      "id": "agr-melon-primera",
+      "id": "agro-melon-1",
       "name": "Melón Primera",
       "price": 165.0,
       "category": "agropecuarios",
@@ -562,7 +528,7 @@
       "description": "Melón de primera calidad."
     },
     {
-      "id": "agr-melon-segunda",
+      "id": "agro-melon-2",
       "name": "Melón Segunda",
       "price": 150.0,
       "category": "agropecuarios",
@@ -570,7 +536,7 @@
       "description": "Melón de segunda calidad."
     },
     {
-      "id": "agr-pina-primera",
+      "id": "agro-pina-1",
       "name": "Piña Primera",
       "price": 170.0,
       "category": "agropecuarios",
@@ -578,7 +544,7 @@
       "description": "Piña de primera calidad."
     },
     {
-      "id": "agr-pina-segunda",
+      "id": "agro-pina-2",
       "name": "Piña Segunda",
       "price": 155.0,
       "category": "agropecuarios",
@@ -586,7 +552,7 @@
       "description": "Piña de segunda calidad."
     },
     {
-      "id": "agr-toronja-primera",
+      "id": "agro-toronja-1",
       "name": "Toronja Primera",
       "price": 200.0,
       "category": "agropecuarios",
@@ -594,7 +560,7 @@
       "description": "Toronja de primera calidad."
     },
     {
-      "id": "agr-toronja-segunda",
+      "id": "agro-toronja-2",
       "name": "Toronja Segunda",
       "price": 190.0,
       "category": "agropecuarios",
@@ -602,7 +568,7 @@
       "description": "Toronja de segunda calidad."
     },
     {
-      "id": "agr-nispero-primera",
+      "id": "agro-nispero-1",
       "name": "Níspero Primera",
       "price": 230.0,
       "category": "agropecuarios",
@@ -610,7 +576,7 @@
       "description": "Níspero de primera calidad."
     },
     {
-      "id": "agr-nispero-segunda",
+      "id": "agro-nispero-2",
       "name": "Níspero Segunda",
       "price": 215.0,
       "category": "agropecuarios",
@@ -618,252 +584,87 @@
       "description": "Níspero de segunda calidad."
     },
     {
-      "id": "agr-carbon-vegetal",
-      "name": "Carbón Vegetal",
+      "id": "agro-carbon-1",
+      "name": "Carbón Marabú Primera",
       "price": 130.0,
       "category": "agropecuarios",
       "unit": "KG",
-      "description": "Carbón vegetal, precio por kilogramo."
+      "description": "Carbón Marabú clasificado calidad Primera."
     },
     {
-      "id": "agr-carbon-marabu",
-      "name": "Carbón Marabú Primera",
+      "id": "agro-carbon-2",
+      "name": "Carbón Marabú Segunda",
       "price": 86.0,
       "category": "agropecuarios",
       "unit": "KG",
-      "description": "Carbón de marabú clasificado de primera calidad."
+      "description": "Carbón Marabú clasificado calidad Segunda."
     },
     {
-      "id": "agr-carbon-mezcla",
-      "name": "Carbón Mezcla Marabú",
+      "id": "agro-carbon-mezcla",
+      "name": "Carbón mezcla Marabú",
       "price": 117.0,
       "category": "agropecuarios",
       "unit": "KG",
-      "description": "Carbón de marabú clasificado: 70% primera + 30% segunda."
+      "description": "Carbón mezcla clasificado de Marabú al 70% Primera + 30% Segunda."
     },
     {
-      "id": "agr-carbon-diferenciado",
-      "name": "Carbón Precio Diferenciado",
+      "id": "agro-carbon-dif",
+      "name": "Carbón precio diferenciado",
       "price": 1600.0,
       "category": "agropecuarios",
       "unit": "KG",
       "description": "Carbón con precio diferenciado."
     },
     {
-      "id": "agr-arroz-consumo",
+      "id": "agro-arroz",
       "name": "Arroz de Consumo",
       "price": 760.87,
       "category": "agropecuarios",
       "unit": "KG",
       "description": "Arroz de consumo nacional."
+    },
+    {
+      "id": "serv-transporte",
+      "name": "Transportación, Carga y Pasajeros",
+      "type": "service",
+      "category": "servicios",
+      "description": "Servicio de transportación de carga y de pasajeros.",
+      "contactText": "Para solicitar este servicio y coordinar el horario, llame o escriba a los números de contacto de la empresa. El horario se confirma de antemano."
+    },
+    {
+      "id": "serv-pintura",
+      "name": "Pintura y Carpintería",
+      "type": "service",
+      "category": "servicios",
+      "description": "Servicios de pintura y carpintería.",
+      "contactText": "Para solicitar este servicio y coordinar el horario, llame o escriba a los números de contacto de la empresa. El horario se confirma de antemano."
+    },
+    {
+      "id": "serv-asesoria",
+      "name": "Asesoría Técnica (Contabilidad)",
+      "type": "service",
+      "category": "servicios",
+      "description": "Asesoría técnica en contabilidad.",
+      "contactText": "Para solicitar este servicio y coordinar el horario, llame o escriba a los números de contacto de la empresa. El horario se confirma de antemano."
+    },
+    {
+      "id": "serv-agricola",
+      "name": "Servicio Agrícola",
+      "type": "service",
+      "category": "servicios",
+      "description": "Servicios agrícolas.",
+      "contactText": "Para solicitar este servicio y coordinar el horario, llame o escriba a los números de contacto de la empresa. El horario se confirma de antemano."
     }
-  ]
+  ],
+  "serviceContact": {
+    "fijos": [
+      "43569143",
+      "43569137"
+    ],
+    "moviles": [
+      "+53 52098083",
+      "+53 52117036"
+    ],
+    "note": "Importante: para más información de los servicios llame o escriba a los números de contacto. El horario de cada servicio se coordina de antemano."
+  }
 };
-
-  /* ======================================================================
-     CARGA DE DATOS
-     ====================================================================== */
-  function load() {
-    // Capa 1: respaldo embebido en data/products.js (cargado como <script>)
-    if (global.PRODUCTS_DATA) {
-      try {
-        initData(global.PRODUCTS_DATA);
-        console.info("products.js: catalogo cargado desde window.PRODUCTS_DATA");
-        return Promise.resolve();
-      } catch (e) {
-        console.warn("products.js: window.PRODUCTS_DATA invalido:", e);
-      }
-    }
-
-    // Capa 2: fetch del JSON
-    return fetch(DATA_URL)
-      .then(function (res) {
-        if (!res.ok) {
-          throw new Error("HTTP " + res.status + " al cargar products.json");
-        }
-        return res.json();
-      })
-      .then(function (data) {
-        console.info("products.js: catalogo cargado desde " + DATA_URL);
-        initData(data);
-      })
-      .catch(function (err) {
-        console.warn(
-          "products.js: no se pudo leer " + DATA_URL + " (" + (err && err.message ? err.message : err) + "). " +
-          "Usando catalogo embebido en este archivo..."
-        );
-        // Capa 3: catalogo embebido en este propio js/products.js
-        try {
-          initData(CATALOG_EMBED);
-          console.info("products.js: catalogo cargado desde CATALOG_EMBED");
-        } catch (e2) {
-          console.error("products.js: catalogo embebido invalido:", e2);
-          showError();
-        }
-      });
-  }
-
-  /** Valida, ordena y renderiza los datos del catalogo. */
-  function initData(data) {
-    if (!data || !Array.isArray(data.categories) || !Array.isArray(data.products)) {
-      throw new Error("Estructura de datos invalida");
-    }
-    categories = data.categories.slice().sort(function (a, b) {
-      return (a.order || 0) - (b.order || 0);
-    });
-    products = data.products.slice();
-    renderNav();
-    renderCatalog();
-  }
-
-  /* ======================================================================
-     RENDER: NAVEGACION DE CATEGORIAS
-     ====================================================================== */
-  function renderNav() {
-    var nav = document.getElementById("navCategories");
-    if (!nav) return;
-    nav.innerHTML = "";
-    categories.forEach(function (cat) {
-      var a = document.createElement("a");
-      a.href = "#cat-" + cat.id;
-      a.textContent = cat.name;
-      nav.appendChild(a);
-    });
-  }
-
-  /* ======================================================================
-     RENDER: CATALOGO PRINCIPAL
-     ====================================================================== */
-  function renderCatalog() {
-    var catalog = document.getElementById("catalog");
-    if (!catalog) return;
-    catalog.innerHTML = ""; // limpia el "Cargando..."
-
-    categories.forEach(function (cat) {
-      var prodsInCat = products.filter(function (p) { return p.category === cat.id; });
-      if (prodsInCat.length === 0) return; // no muestra categorias vacias
-
-      var section = document.createElement("section");
-      section.className = "category-section";
-      section.id = "cat-" + cat.id;
-
-      var title = document.createElement("h2");
-      title.className = "category-title";
-      title.textContent = cat.name;
-      section.appendChild(title);
-
-      // Descripcion opcional de la categoria (campo "description" del JSON)
-      if (cat.description) {
-        var desc = document.createElement("p");
-        desc.className = "category-desc";
-        desc.textContent = cat.description;
-        section.appendChild(desc);
-      }
-
-      var grid = document.createElement("div");
-      grid.className = "product-grid";
-
-      prodsInCat.forEach(function (p) {
-        grid.appendChild(buildProductCard(p));
-      });
-
-      section.appendChild(grid);
-      catalog.appendChild(section);
-    });
-  }
-
-  /* ======================================================================
-     CONSTRUYE UNA TARJETA DE PRODUCTO
-     ====================================================================== */
-  function buildProductCard(product) {
-    var card = document.createElement("article");
-    card.className = "product-card";
-
-    var name = document.createElement("h3");
-    name.className = "product-name";
-    name.textContent = product.name;
-
-    var desc = document.createElement("p");
-    desc.className = "product-desc";
-    desc.textContent = product.description || "";
-
-    // Precio + unidad de venta opcional (KG, U, LITRO, LIBRA...)
-    var price = document.createElement("div");
-    price.className = "product-price";
-    if (product.unit) {
-      price.innerHTML =
-        formatMoney(product.price) +
-        ' <span class="product-unit">/ ' + escapeHtml(product.unit) + "</span>";
-    } else {
-      price.textContent = formatMoney(product.price);
-    }
-
-    var btn = document.createElement("button");
-    btn.className = "btn btn-primary btn-block";
-    btn.type = "button";
-    btn.textContent = "A\u00f1adir al carrito";
-    btn.addEventListener("click", function () {
-      // El carrito vive en otro modulo (cart.js), disponible como window.Cart
-      if (global.Cart) {
-        global.Cart.addItem(product);
-        // Feedback visual temporal
-        var original = btn.textContent;
-        btn.textContent = "\u2713 A\u00f1adido";
-        btn.disabled = true;
-        setTimeout(function () {
-          btn.textContent = original;
-          btn.disabled = false;
-        }, 900);
-      }
-    });
-
-    card.appendChild(name);
-    if (product.description) card.appendChild(desc);
-    card.appendChild(price);
-    card.appendChild(btn);
-    return card;
-  }
-
-  /* ======================================================================
-     UTILIDADES
-     ====================================================================== */
-
-  /**
-   * Formato monetario con 2 decimales y separador de miles.
-   * Usa la utilidad global Money (definida en cart.js, que se carga antes);
-   * si no estuviera disponible, cae a un formato simple.
-   */
-  function formatMoney(n) {
-    if (global.Money && typeof global.Money.format === "function") {
-      return global.Money.format(n);
-    }
-    return (Number(n) || 0).toFixed(2);
-  }
-
-  /** Escape basico de HTML para valores insertados con innerHTML. */
-  function escapeHtml(str) {
-    return String(str)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-  }
-
-  /** Muestra el mensaje de error amigable si nada funciono. */
-  function showError() {
-    var loading = document.getElementById("loadingMsg");
-    if (loading) loading.hidden = true;
-    var box = document.getElementById("errorBox");
-    if (box) box.hidden = false;
-  }
-
-  /* ======================================================================
-     API PUBLICA
-     ====================================================================== */
-  global.Products = {
-    load: load,
-    getAll: function () { return products.slice(); },
-    getCategories: function () { return categories.slice(); }
-  };
-})(window);
