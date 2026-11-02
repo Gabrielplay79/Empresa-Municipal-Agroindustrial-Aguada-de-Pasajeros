@@ -612,7 +612,7 @@ window.PRODUCTS_DATA = {
       "name": "Carbón precio diferenciado",
       "price": 1600.0,
       "category": "agropecuarios",
-      "unit": "KG",
+      "unit": "Sac",
       "description": "Carbón con precio diferenciado."
     },
     {
@@ -660,7 +660,7 @@ window.PRODUCTS_DATA = {
       "name": "Carbón vegetal",
       "price": 1600.0,
       "category": "agropecuarios",
-      "unit": "KG",
+      "unit": "Sac",
       "type": "request",
       "description": "Carbón vegetal. Precio de referencia; la venta se gestiona como solicitud por acuerdo.",
       "requestText": "Este producto se solicita por acuerdo. Indique cantidad y detalles; coordinamos disponibilidad y entrega."
