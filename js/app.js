@@ -17,12 +17,12 @@
   "use strict";
 
   /* ======================================================================
-     ⚠️ CONFIGURACIÓN — Cambia aquí tu número de WhatsApp
+     ⚠️ CONFIGURACIÓN — Número de WhatsApp real (EMAIAP)
      ======================================================================
-     Usa el formato internacional SIN signos, espacios ni "+".
-     Ejemplo: para +53 55555555 escribe "5355555555".
+     Formato internacional SIN signos, espacios ni "+".
+     +53 63515950 → 5363515950
      ====================================================================== */
-  var WHATSAPP_NUMBER = "5355555555";
+  var WHATSAPP_NUMBER = "5363515950";
 
   /* ---------- Referencias del DOM ---------- */
   var $ = function (id) { return document.getElementById(id); };
@@ -158,7 +158,7 @@
     cartCountEl.setAttribute("data-count", String(count));
 
     // Total (Money.format añade separador de miles)
-    cartTotalEl.textContent = "$" + fmt(total);
+    cartTotalEl.textContent = "$" + fmt(total) + " CUP";
 
     // Botón de checkout (deshabilitado si vacío)
     checkoutBtn.disabled = items.length === 0;
@@ -286,7 +286,7 @@
     var totalLine = document.createElement("div");
     totalLine.className = "summary-line";
     totalLine.innerHTML =
-      '<span>Total</span><span>$' + fmt(Cart.getTotal()) + "</span>";
+      '<span>Total</span><span>$' + fmt(Cart.getTotal()) + " CUP</span>";
     checkoutSummary.appendChild(totalLine);
   }
 

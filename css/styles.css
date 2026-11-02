@@ -1001,3 +1001,140 @@ main,header,footer{position:relative;z-index:1}
     padding: 1.4rem 1.15rem;
   }
 }
+
+/* ==========================================================================
+   UI POLISH — más belleza sin salir del sistema visual actual
+   ========================================================================== */
+
+/* Badge CUP en precio de producto */
+.price-currency {
+  display: inline-block;
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--papel);
+  background: var(--oliva);
+  border: 1.5px solid var(--tinta);
+  border-radius: 6px;
+  padding: 0.15rem 0.4rem;
+  margin-left: 0.15rem;
+  vertical-align: middle;
+  line-height: 1.2;
+}
+
+/* Header más presente */
+.site-header {
+  backdrop-filter: blur(6px);
+  background: rgba(245, 239, 226, 0.94);
+}
+.brand-name {
+  letter-spacing: -0.02em;
+}
+.brand:hover .brand-logo {
+  box-shadow: 4px 4px 0 var(--acento);
+  transform: translate(-1px, -1px);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+/* Hero con acento lateral */
+.hero {
+  border-left: 5px solid var(--acento);
+  padding-left: calc(2rem - 3.5px);
+}
+.hero h1 {
+  max-width: 18ch;
+}
+
+/* Trust strip más sólida */
+.trust-strip {
+  box-shadow: var(--sombra-sm);
+}
+.trust-item .trust-value {
+  color: var(--tinta);
+}
+.trust-item:nth-child(1) .trust-value {
+  color: var(--oliva);
+}
+.trust-item:nth-child(2) .trust-value {
+  color: var(--acento);
+}
+
+/* Tarjetas de producto: más respiro y detalle */
+.product-card {
+  gap: 0.45rem;
+  padding: 1.2rem 1.25rem 1.35rem;
+  position: relative;
+}
+.product-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: transparent;
+  border-radius: var(--radio) var(--radio) 0 0;
+  transition: background 0.2s ease;
+}
+.product-card:hover::after {
+  background: var(--acento);
+}
+.product-name {
+  font-size: 1.22rem;
+}
+.product-price {
+  margin: 0.35rem 0 0.85rem;
+  gap: 0.35rem;
+}
+
+/* Botón añadir: transición más limpia */
+.product-card .btn-primary {
+  margin-top: auto;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+/* Sección de categoría con más aire */
+.category-section {
+  margin-bottom: 3.4rem;
+}
+.category-title::after {
+  width: 72px;
+  height: 3.5px;
+  border-radius: 2px;
+}
+
+/* About: borde de acento sutil */
+.about-section {
+  border-left: 4px solid var(--oliva);
+}
+
+/* Service cards ya tienen borde; unificar hover */
+.service-card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: var(--sombra);
+}
+
+/* Contacto: iconos un poco más vivos */
+.contacto-item .ico {
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+.contacto-item:hover .ico {
+  box-shadow: 4px 4px 0 var(--acento);
+  transform: translate(-1px, -1px);
+}
+
+/* Footer más limpio en el contraste */
+.site-footer {
+  border-top: 1.5px solid var(--tinta);
+}
+
+@media (max-width: 720px) {
+  .hero {
+    padding-left: calc(1.2rem - 3.5px);
+  }
+  .hero h1 {
+    max-width: none;
+  }
+}

@@ -854,9 +854,10 @@
       if (product.unit) {
         price.innerHTML =
           formatMoney(product.price) +
-          ' <span class="product-unit">/ ' + escapeHtml(product.unit) + "</span>";
+          ' <span class="product-unit">/ ' + escapeHtml(product.unit) + "</span>" +
+          ' <span class="price-currency">CUP</span>';
       } else {
-        price.textContent = formatMoney(product.price);
+        price.innerHTML = formatMoney(product.price) + ' <span class="price-currency">CUP</span>';
       }
 
       var btn = document.createElement("button");
