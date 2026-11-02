@@ -654,6 +654,16 @@ window.PRODUCTS_DATA = {
       "category": "servicios",
       "description": "Servicios agrícolas.",
       "contactText": "Para solicitar este servicio y coordinar el horario, llame o escriba a los números de contacto de la empresa. El horario se confirma de antemano."
+    },
+    {
+      "id": "agro-carbon-vegetal",
+      "name": "Carbón vegetal",
+      "price": 1600.0,
+      "category": "agropecuarios",
+      "unit": "KG",
+      "type": "request",
+      "description": "Carbón vegetal. Precio de referencia; la venta se gestiona como solicitud por acuerdo.",
+      "requestText": "Este producto se solicita por acuerdo. Indique cantidad y detalles; coordinamos disponibilidad y entrega."
     }
   ],
   "serviceContact": {

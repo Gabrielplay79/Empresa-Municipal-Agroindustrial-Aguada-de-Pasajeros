@@ -23,6 +23,8 @@
      +53 63515950 → 5363515950
      ====================================================================== */
   var WHATSAPP_NUMBER = "5363515950";
+  // Expuesto para solicitudes por acuerdo (products.js)
+  window.WHATSAPP_NUMBER = WHATSAPP_NUMBER;
 
   /* ---------- Referencias del DOM ---------- */
   var $ = function (id) { return document.getElementById(id); };

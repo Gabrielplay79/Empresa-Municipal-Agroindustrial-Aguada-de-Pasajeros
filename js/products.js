@@ -686,6 +686,16 @@
       "category": "servicios",
       "description": "Servicios agrícolas.",
       "contactText": "Para solicitar este servicio y coordinar el horario, llame o escriba a los números de contacto de la empresa. El horario se confirma de antemano."
+    },
+    {
+      "id": "agro-carbon-vegetal",
+      "name": "Carbón vegetal",
+      "price": 1600.0,
+      "category": "agropecuarios",
+      "unit": "KG",
+      "type": "request",
+      "description": "Carbón vegetal. Precio de referencia; la venta se gestiona como solicitud por acuerdo.",
+      "requestText": "Este producto se solicita por acuerdo. Indique cantidad y detalles; coordinamos disponibilidad y entrega."
     }
   ],
   "serviceContact": {
@@ -818,8 +828,13 @@
      ====================================================================== */
   function buildProductCard(product) {
     var isService = product.type === "service";
+    var isRequest = product.type === "request";
     var card = document.createElement("article");
-    card.className = isService ? "product-card service-card" : "product-card";
+    card.className = isService
+      ? "product-card service-card"
+      : isRequest
+        ? "product-card request-card"
+        : "product-card";
 
     var name = document.createElement("h3");
     name.className = "product-name";
@@ -833,7 +848,6 @@
     if (product.description) card.appendChild(desc);
 
     if (isService) {
-      // Servicios: no precio, no carrito. Solo botón de contacto.
       var note = document.createElement("p");
       note.className = "service-note";
       note.textContent = "No se añade al carrito. Debe coordinar horario y detalles con anticipación.";
@@ -847,8 +861,38 @@
         showServiceModal(product);
       });
       card.appendChild(btn);
+    } else if (isRequest) {
+      var badge = document.createElement("span");
+      badge.className = "request-badge";
+      badge.textContent = "Solicitud por acuerdo";
+      card.appendChild(badge);
+
+      var price = document.createElement("div");
+      price.className = "product-price";
+      if (product.unit) {
+        price.innerHTML =
+          formatMoney(product.price) +
+          ' <span class="product-unit">/ ' + escapeHtml(product.unit) + "</span>" +
+          ' <span class="price-currency">CUP</span>';
+      } else {
+        price.innerHTML = formatMoney(product.price) + ' <span class="price-currency">CUP</span>';
+      }
+      card.appendChild(price);
+
+      var note = document.createElement("p");
+      note.className = "service-note";
+      note.textContent = product.requestText || "Precio de referencia. La venta se coordina por acuerdo; no se añade al carrito.";
+      card.appendChild(note);
+
+      var btn = document.createElement("button");
+      btn.className = "btn btn-primary btn-block";
+      btn.type = "button";
+      btn.textContent = "Solicitar por WhatsApp";
+      btn.addEventListener("click", function () {
+        openRequestWhatsApp(product);
+      });
+      card.appendChild(btn);
     } else {
-      // Producto normal
       var price = document.createElement("div");
       price.className = "product-price";
       if (product.unit) {
@@ -883,7 +927,25 @@
     return card;
   }
 
-  /* ======================================================================
+  /** Abre WhatsApp con mensaje de solicitud por acuerdo. */
+  function openRequestWhatsApp(product) {
+    var number = global.WHATSAPP_NUMBER || "5363515950";
+    var unit = product.unit ? " / " + product.unit : "";
+    var priceLine = product.price != null
+      ? "Precio de referencia: $" + formatMoney(product.price) + unit + " CUP"
+      : "";
+    var message =
+      "Hola, quiero solicitar por acuerdo:\n\n" +
+      "• " + product.name + "\n" +
+      (priceLine ? priceLine + "\n" : "") +
+      "\nCantidad deseada: (indicar)\n" +
+      "Detalles / entrega: (indicar)\n\n" +
+      "Quedo atento para coordinar.";
+    var url = "https://wa.me/" + number + "?text=" + encodeURIComponent(message);
+    window.open(url, "_blank", "noopener,noreferrer");
+  }
+
+/* ======================================================================
      MODAL DE SERVICIOS — muestra números de contacto
      ====================================================================== */
   function showServiceModal(product) {
